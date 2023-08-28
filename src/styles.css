@@ -5,37 +5,51 @@
 
 @layer base {
 
+    body {
+        @apply text-gray-950 dark:text-red-800
+    }
+
     [type="text"], [type="password"], textarea {
-        @apply w-full rounded-xl
+        @apply w-full border-2 border-blue-400 text-blue-800 rounded-md focus:ring-2 focus:ring-blue-300 focus:border-blue-700
+        dark:bg-gray-800 dark:border-blue-700 dark:focus:ring-blue-600
     }
 
     h1 {
-        @apply font-bold text-5xl
+        @apply font-bold text-5xl dark:text-gray-100
     }
     
     h2 {
-        @apply font-bold text-4xl
+        @apply font-bold text-4xl dark:text-gray-100
     }
     
     h3 {
-        @apply font-bold text-3xl
+        @apply font-bold text-3xl dark:text-gray-100
     }
     
     h4 {
-        @apply font-bold text-2xl
+        @apply font-bold text-2xl dark:text-gray-100
     }
     
     h5 {
-        @apply font-bold text-xl
+        @apply font-bold text-xl dark:text-gray-100
     }
     
     h6 {
-        @apply font-semibold text-lg
+        @apply font-semibold text-lg dark:text-gray-100
+    }
+
+}
+
+@layer components {
+
+    .fl {
+        @apply block text-gray-500
     }
 
 }
 
 
 .btn {
-    @apply border border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold
+    @apply border rounded-md border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold
+        dark:bg-blue-500 dark:hover:bg-blue-300
 }

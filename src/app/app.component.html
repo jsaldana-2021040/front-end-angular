@@ -1,63 +1,57 @@
-<div class="flex items-center justify-center w-screen border-8">
-  <div class="rounded-md shadow-2xl border-8 border-red-400 p-10 m-52">
-    <div class="mb-5">
-      <label class="block">Nombres</label>
-      <input type="text">
-    </div>
-
-    <div class="mb-5">
-      <label class="block">Apellidos</label>
-      <input type="text">
-    </div>
-
-    <div class="mb-5">
-      <label class="block">Contraseña</label>
-      <input type="password">
-    </div>
-
-    <div class="mb-5">
-      <label class="block">Contraseña</label>
-      <textarea rows="10"></textarea>
-    </div>
-
-    <div class="mb-5">
-      <button
-        class="btn"
-        (click)="confirmarFormulario()" type="button">Confirmar</button>
-    </div>
-
-    <div *ngIf="mostrarContenido">
-      <p>El contenido</p>
-    </div>
-
-    <div class="mb-5">
-      <ol class="text-sm">
-        <li *ngFor="let item of personas">Nombres: <b class="font-bold">{{item.nombres}}</b> Apellidos: <b
-            class="font-bold">{{item.apellidos}}</b></li>
-      </ol>
-    </div>
-
-    <div class="mb-5">
-      <table class="w-full border border-gray-600">
-        <tr class="bg-gray-200">
-          <th class="text-left">Nombres</th>
-          <th class="text-left">Apellidos</th>
-        </tr>
-        <tr *ngFor="let persona of personas" class="border-t border-gray-600 hover:bg-gray-100">
-          <td>{{persona.nombres}}</td>
-          <td>{{persona.apellidos}}</td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="mb-5">
-      <h1 class="text-blue-500">hola</h1>
-      <h2>hola</h2>
-      <h3>hola</h3>
-      <h4>hola</h4>
-      <h5>hola</h5>
-      <h6>hola</h6>
-      hola
+<div class="flex items-center justify-center w-screen dark:bg-slate-900">
+  <div class="rounded-md shadow-2xl border border-gray-400 p-10 m-10">
+    <div class="">
+      <div class="mb-5">
+        <label class="fl">Nombres</label>
+        <input type="text">
+      </div>
+      <div class="mb-5">
+        <label class="fl">Apellidos</label>
+        <input type="text">
+      </div>
+      <div class="mb-5">
+        <label class="fl">Contraseña</label>
+        <input type="password">
+      </div>
+      <div class="mb-5">
+        <label class="fl">Comentario</label>
+        <textarea rows="10"></textarea>
+      </div>
+      <div class="mb-5">
+        <button
+          class="btn"
+          (click)="confirmarFormulario()" type="button">Confirmar</button>
+      </div>
+      <div *ngIf="mostrarContenido">
+        <p>El contenido</p>
+      </div>
+      <div class="mb-5">
+        <ol class="text-sm">
+          <li *ngFor="let item of personas">Nombres: <b class="font-bold">{{item.nombres}}</b> Apellidos: <b
+              class="font-bold">{{item.apellidos}}</b></li>
+        </ol>
+      </div>
+      <div class="mb-5">
+        <table class="w-full border border-gray-600">
+          <tr class="bg-gray-200">
+            <th class="text-left">Nombres</th>
+            <th class="text-left">Apellidos</th>
+          </tr>
+          <tr *ngFor="let persona of personas" class="border-t border-gray-600 hover:bg-gray-100">
+            <td>{{persona.nombres}}</td>
+            <td>{{persona.apellidos}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="mb-5">
+        <h1>hola</h1>
+        <h2>hola</h2>
+        <h3>hola</h3>
+        <h4>hola</h4>
+        <h5>hola</h5>
+        <h6>hola</h6>
+        hola
+      </div>
     </div>
   </div>
 </div>
