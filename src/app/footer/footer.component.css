@@ -1,0 +1,23 @@
+footer{
+  @apply fixed bottom-0 left-0 right-0 bg-black h-auto w-auto text-white
+}
+
+.footer-content{
+  @apply flex items-center justify-center text-center
+}
+
+.footer-content h3{
+  @apply capitalize text-3xl
+}
+
+.footer-content p{
+  @apply max-w-md m-10 text-sm
+}
+
+.footer-bottom{
+  @apply bg-black w-auto p-5 text-center
+}
+
+.footer-bottom p{
+  @apply text-sm capitalize
+}

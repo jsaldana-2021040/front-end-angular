@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormularioBaseComponent } from './formulario-base/formulario-base.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { FooterComponent } from './footer/footer.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +16,9 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     FormularioBaseComponent,
     HomeComponent,
+    AboutComponent,
+    FooterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
