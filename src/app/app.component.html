@@ -1,5 +1,5 @@
-<div class="h-screen flex items-center justify-center w-screen">
-  <div class="rounded-md shadow-md border border-gray-400 p-10">
+<div class="flex items-center justify-center w-screen border-8">
+  <div class="rounded-md shadow-2xl border-8 border-red-400 p-10 m-52">
     <div class="mb-5">
       <label class="block">Nombres</label>
       <input type="text">
@@ -11,10 +11,19 @@
     </div>
 
     <div class="mb-5">
+      <label class="block">Contraseña</label>
+      <input type="password">
+    </div>
+
+    <div class="mb-5">
+      <label class="block">Contraseña</label>
+      <textarea rows="10"></textarea>
+    </div>
+
+    <div class="mb-5">
       <button
-        class="border border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold"
-        (click)="confirmarFormulario()"
-        type="button">Confirmar</button>
+        class="btn"
+        (click)="confirmarFormulario()" type="button">Confirmar</button>
     </div>
 
     <div *ngIf="mostrarContenido">
@@ -23,7 +32,8 @@
 
     <div class="mb-5">
       <ol class="text-sm">
-        <li *ngFor="let item of personas">Nombres: <b class="font-bold">{{item.nombres}}</b> Apellidos: <b class="font-bold">{{item.apellidos}}</b></li>
+        <li *ngFor="let item of personas">Nombres: <b class="font-bold">{{item.nombres}}</b> Apellidos: <b
+            class="font-bold">{{item.apellidos}}</b></li>
       </ol>
     </div>
 
@@ -38,6 +48,16 @@
           <td>{{persona.apellidos}}</td>
         </tr>
       </table>
+    </div>
+
+    <div class="mb-5">
+      <h1 class="text-blue-500">hola</h1>
+      <h2>hola</h2>
+      <h3>hola</h3>
+      <h4>hola</h4>
+      <h5>hola</h5>
+      <h6>hola</h6>
+      hola
     </div>
   </div>
 </div>
