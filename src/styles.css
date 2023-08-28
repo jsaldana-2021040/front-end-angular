@@ -6,7 +6,7 @@
 @layer base {
 
     body {
-        @apply text-gray-950 dark:text-red-800
+        @apply text-gray-950 dark:text-red-800  dark:bg-slate-900
     }
 
     [type="text"], [type="password"], textarea {
