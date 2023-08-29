@@ -1,0 +1,19 @@
+
+<table>
+  <tr>
+    <th>Codigo</th>
+    <th>Nombre</th>
+    <th>Dirección</th>
+    <th>Telefono</th>
+    <th class="text-center">Activo</th>
+  </tr>
+  <tr *ngFor="let item of listEmpresas">
+    <td>{{item.codEmpresa}}</td>
+    <td>{{item.nombre}}</td>
+    <td>{{item.direccion}}</td>
+    <td>{{item.telefono}}</td>
+    <td class="text-center">
+      <i class="fas fa-circle fa-lg" [ngClass]="item.activo ? 'text-green-500' : 'text-red-500'"></i>
+    </td>
+  </tr>
+</table>
