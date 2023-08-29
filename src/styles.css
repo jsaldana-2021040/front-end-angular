@@ -6,7 +6,7 @@
 @layer base {
 
   body {
-    @apply bg-gray-50 dark:bg-black text-gray-700 dark:text-gray-200;
+    @apply relative bg-gray-50 pb-24 dark:bg-black text-gray-700 dark:text-gray-200 min-h-screen;
   }
 
   [type="text"],

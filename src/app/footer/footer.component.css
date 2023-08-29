@@ -1,5 +1,5 @@
 footer{
-  @apply relative bottom-0 left-0 right-0 bg-black h-auto w-auto text-white
+  @apply absolute bottom-0 left-0 right-0 bg-black h-24 w-auto text-white
 }
 
 .footer-content{
