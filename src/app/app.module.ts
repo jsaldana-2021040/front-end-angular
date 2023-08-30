@@ -13,6 +13,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { EmpresasListComponent } from './components/empresas/empresas-list/empresas-list.component';
 import { PersonasListComponent } from './components/personas/personas-list/personas-list.component';
 import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuarios-list.component';
+import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
+import { EmpresasCreateComponent } from './components/empresas/empresas-create/empresas-create.component';
+import { PersonasCreateComponent } from './components/personas/personas-create/personas-create.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuar
     EmpresasListComponent,
     PersonasListComponent,
     UsuariosListComponent,
+    PageHeaderComponent,
+    EmpresasCreateComponent,
+    PersonasCreateComponent,
   ],
   imports: [
     BrowserModule,

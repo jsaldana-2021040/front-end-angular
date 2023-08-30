@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Personas } from 'src/app/shared/interfaces/personas';
 import { personasService } from 'src/app/shared/services/personas.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-personas-list',
@@ -12,7 +14,8 @@ export class PersonasListComponent implements OnInit {
   listPersonas: Personas[] = [];
 
   constructor(
-    private personasSvc: personasService
+    private personasSvc: personasService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

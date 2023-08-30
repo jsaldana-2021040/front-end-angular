@@ -39,8 +39,12 @@
     @apply font-semibold text-lg
   }
 
+  button {
+    @apply border rounded-md border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold dark:bg-blue-500 dark:hover:bg-blue-300 px-4
+  }
+
   .btn {
-    @apply border rounded-md border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold dark:bg-blue-500 dark:hover:bg-blue-300
+    @apply border rounded-md border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold dark:bg-blue-500 dark:hover:bg-blue-300 px-4
   }
 
   table {

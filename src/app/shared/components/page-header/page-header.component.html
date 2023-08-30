@@ -1,0 +1,7 @@
+<div class="flex items-center mt-10 mb-1">
+  <h1 class="inline-block grow"><i class="fa-fw" [ngClass]="[tipoIcono, 'fa-' + icono]"></i> {{nombrePagina}}</h1>
+  <div *ngIf="mostrarBtnAgregar">
+    <a [routerLink]="rutaAgregar" class="btn"><i class="fas fa-plus"></i> Agregar</a>
+  </div>
+</div>
+<hr class="border mb-5">

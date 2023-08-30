@@ -1,4 +1,6 @@
-<table class="mt-20">
+<page-header icono="city" nombrePagina="Empresas" />
+
+<table>
   <tr class="bg-violet-800 bg-opacity-40 text-base">
     <th class="p-3">Codigo</th>
     <th class="p-3">Nombre</th>
@@ -6,7 +8,7 @@
     <th class="p-3">Telefono</th>
     <th class="p-3 text-center">Activo</th>
   </tr>
-  <tr *ngFor="let item of listEmpresas" class="even:bg-slate-100 border-slate-700">
+  <tr *ngFor="let item of listEmpresas; even as e" class="even:bg-slate-100 border-slate-700">
     <td class="pl-3">{{item.codEmpresa}}</td>
     <td class="pl-3">{{item.nombre}}</td>
     <td class="pl-3">{{item.direccion}}</td>

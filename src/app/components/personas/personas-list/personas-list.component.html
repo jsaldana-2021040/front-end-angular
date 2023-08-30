@@ -1,9 +1,11 @@
-<table class="mt-20">
+<page-header icono="user" nombrePagina="Personas" />
+
+<table>
   <tr class="bg-violet-800 bg-opacity-40 text-base">
     <th class="p-3">codPersona</th>
     <th class="p-3">Nombres</th>
     <th class="p-3">Apellidos</th>
-    <th class="p-3">codigo empresa</th>
+    <th class="p-3">Empresa</th>
     <th class="p-3">direcciones</th>
     <th class="p-3 text-center">Visa</th>
     <th class="p-3 text-center">Activo</th>
@@ -12,10 +14,12 @@
     <td class="pl-3">{{item.codPersona}}</td>
     <td class="pl-3">{{item.nombres}}</td>
     <td class="pl-3">{{item.apellidos}}</td>
-    <td class="pl-3">{{item.empresaCod}}</td>
-    <td class="pl-3">{{item.direcciones}}</td>
+    <td class="pl-3">{{item.empresa?.nombre}}</td>
+    <td class="pl-3">
+      <span *ngFor="let direccion of item.direcciones; last as isLast">{{direccion.codDireccion + (isLast ? '' : ', ')}}</span>
+    </td>
     <td class="text-center p-3">
-      <i class="fas fa-circle fa-lg" [ngClass]="item.tieneVisa ? 'text-green-500' : 'text-red-500'"></i>
+      <i class="fa-address-card fa-lg" [ngClass]="item.tieneVisa ? 'fas text-green-500' : 'far text-red-500'"></i>
     </td>
     <td class="text-center p-3">
       <i class="fas fa-circle fa-lg" [ngClass]="item.activo ? 'text-green-500' : 'text-red-500'"></i>

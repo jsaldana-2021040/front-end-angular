@@ -1,3 +1,6 @@
+import { Direcciones } from "./direcciones";
+import { Empresas } from "./empresas";
+
 export interface Personas {
   codPersona: number;
   nombres: string;
@@ -5,13 +8,7 @@ export interface Personas {
   tieneVisa: boolean;
   activo: boolean;
   empresaCod: number;
-  direcciones: [
-    {
-      codDireccion: number,
-      direccion: string,
-      zona: string,
-      activo: boolean,
-      personaCod: number
-    }
-  ]
+  
+  empresa?: Empresas;
+  direcciones?: Direcciones[];
 }
