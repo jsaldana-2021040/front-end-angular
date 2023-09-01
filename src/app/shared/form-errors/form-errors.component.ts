@@ -9,6 +9,6 @@ import { FormControl } from '@angular/forms';
 })
 export class FormErrorsComponent {
 
-  @Input() formControl: FormControl | null = null;
+  @Input() control: FormControl = new FormControl();
 
 }

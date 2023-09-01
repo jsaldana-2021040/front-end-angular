@@ -13,6 +13,12 @@ import { EmpresasService } from 'src/app/shared/services/empresas.service';
 export class EmpresasCreateComponent {
 
   enviandoDatos: boolean = false;
+  
+  empresa = new FormGroup({
+    nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
+    direccion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
+    telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(8)] })
+  });
 
   constructor(
     private empresasSvc: EmpresasService,
@@ -20,11 +26,6 @@ export class EmpresasCreateComponent {
     private route: ActivatedRoute
   ) { }
 
-  empresa = new FormGroup({
-    nombre: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    direccion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
-    telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(8)] })
-  });
 
   onSubmit(): void {
 

@@ -6,13 +6,13 @@
     <div>
       <label for="nombres" class="form-label">Nombres</label>
       <input formControlName="nombres" id="nombres" name="nombres" type="text">
-      <app-form-errors [formControl]="persona.controls.nombres"/>
+      <app-form-errors [control]="persona.controls.nombres"/>
     </div>
 
     <div>
       <label for="apellidos" class="form-label">Apellidos</label>
       <input formControlName="apellidos" id="apellidos" name="apellidos" type="text">
-      <app-form-errors [formControl]="persona.controls.apellidos"/>
+      <app-form-errors [control]="persona.controls.apellidos"/>
     </div>
 
     <div>
@@ -20,7 +20,7 @@
       <select name="empresas" id="empresas" formControlName="empresaCod">
         <option *ngFor="let item of listEmpresas" [ngValue]="item.codEmpresa">{{item.nombre}}</option>
       </select>
-      <app-form-errors [formControl]="persona.controls.empresaCod"/>
+      <app-form-errors [control]="persona.controls.empresaCod"/>
     </div>
     
     <div>

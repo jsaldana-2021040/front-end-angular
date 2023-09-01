@@ -4,18 +4,21 @@
       <div>
         <label for="nombre" class="form-label">Nombre</label>
         <input formControlName="nombre" id="nombre" name="nombre" type="text">
-        <app-form-errors [formControl]="empresa.controls.nombre"/>
+        <app-form-errors [control]="empresa.controls.nombre"/>
       </div>
+
       <div>
         <label for="direccion" class="form-label">Direccion</label>
         <input formControlName="direccion" id="direccion" name="direccion" type="text">
-        <app-form-errors [formControl]="empresa.controls.direccion"/>
+        <app-form-errors [control]="empresa.controls.direccion"/>
       </div>
+
       <div>
         <label for="telefono" class="form-label">Telefono</label>
         <input formControlName="telefono" id="telefono" name="telefono" type="text">
-        <app-form-errors [formControl]="empresa.controls.telefono"/>
+        <app-form-errors [control]="empresa.controls.telefono"/>
       </div>
+
       <div class="flex grid-cols-2 gap-x-2">
         <button type="submit" class="btn-p" [disabled]="enviandoDatos || empresa.invalid">Agregar</button>
         <button type="button" class="btn-d" routerLink="..">
