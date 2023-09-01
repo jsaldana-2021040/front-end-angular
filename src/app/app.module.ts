@@ -16,6 +16,9 @@ import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuar
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { EmpresasCreateComponent } from './components/empresas/empresas-create/empresas-create.component';
 import { PersonasCreateComponent } from './components/personas/personas-create/personas-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UsuariosCreateComponent } from './components/usuarios/usuarios-create/usuarios-create.component';
+import { FormErrorsComponent } from './shared/form-errors/form-errors.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +35,14 @@ import { PersonasCreateComponent } from './components/personas/personas-create/p
     PageHeaderComponent,
     EmpresasCreateComponent,
     PersonasCreateComponent,
+    UsuariosCreateComponent,
+    FormErrorsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

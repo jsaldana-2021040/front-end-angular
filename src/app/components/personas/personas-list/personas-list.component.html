@@ -1,21 +1,22 @@
 <page-header icono="user" nombrePagina="Personas" />
 
-<table>
+<div class="overflow-x-scroll m-4 md:overflow-x-auto">
+<table class="mb-12">
   <tr class="bg-violet-800 bg-opacity-40 text-base">
-    <th class="p-3">codPersona</th>
-    <th class="p-3">Nombres</th>
-    <th class="p-3">Apellidos</th>
-    <th class="p-3">Empresa</th>
-    <th class="p-3">direcciones</th>
-    <th class="p-3 text-center">Visa</th>
-    <th class="p-3 text-center">Activo</th>
+    <th class="p-3 pr-7">codPersona</th>
+    <th class="p-3 pr-7">Nombres</th>
+    <th class="p-3 pr-7">Apellidos</th>
+    <th class="p-3 pr-7">Empresa</th>
+    <th class="p-3 pr-7">direcciones</th>
+    <th class="p-3 text-center pr-5">Visa</th>
+    <th class="p-3 text-center pr-5">Activo</th>
   </tr>
   <tr *ngFor="let item of listPersonas" class="even:bg-slate-100 border-slate-700">
-    <td class="pl-3">{{item.codPersona}}</td>
-    <td class="pl-3">{{item.nombres}}</td>
-    <td class="pl-3">{{item.apellidos}}</td>
-    <td class="pl-3">{{item.empresa?.nombre}}</td>
-    <td class="pl-3">
+    <td class="pl-3 pr-7">{{item.codPersona}}</td>
+    <td class="pl-3 pr-7">{{item.nombres}}</td>
+    <td class="pl-3 pr-7">{{item.apellidos}}</td>
+    <td class="pl-3 pr-7">{{item.empresa?.nombre}}</td>
+    <td class="pl-3 pr-7">
       <span *ngFor="let direccion of item.direcciones; last as isLast">{{direccion.codDireccion + (isLast ? '' : ', ')}}</span>
     </td>
     <td class="text-center p-3">
@@ -26,3 +27,4 @@
     </td>
   </tr>
 </table>
+</div>

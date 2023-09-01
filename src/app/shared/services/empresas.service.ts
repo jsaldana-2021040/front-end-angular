@@ -20,7 +20,7 @@ export class EmpresasService {
     );
   }
 
-  post(body: any): Observable<Empresas> {
+  post(body: Partial<Empresas>): Observable<Empresas> {
     return this.http.post<Empresas>(this.url, body).pipe(
       first()
     );

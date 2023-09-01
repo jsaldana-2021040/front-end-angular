@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Personas } from 'src/app/shared/interfaces/personas';
-import { personasService } from 'src/app/shared/services/personas.service';
+import { PersonasService } from 'src/app/shared/services/personas.service';
 import { Router } from '@angular/router';
 
 
@@ -14,7 +14,7 @@ export class PersonasListComponent implements OnInit {
   listPersonas: Personas[] = [];
 
   constructor(
-    private personasSvc: personasService,
+    private personasSvc: PersonasService,
     private router: Router
   ) { }
 

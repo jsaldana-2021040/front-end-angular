@@ -9,6 +9,7 @@ import { PersonasListComponent } from './components/personas/personas-list/perso
 import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuarios-list.component';
 import { EmpresasCreateComponent } from './components/empresas/empresas-create/empresas-create.component';
 import { PersonasCreateComponent } from './components/personas/personas-create/personas-create.component';
+import { UsuariosCreateComponent } from './components/usuarios/usuarios-create/usuarios-create.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'personas', component: PersonasListComponent },
   { path: 'personas/agregar', component: PersonasCreateComponent },
   { path: 'usuarios', component: UsuariosListComponent },
+  { path: 'usuarios/agregar', component: UsuariosCreateComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

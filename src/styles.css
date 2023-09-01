@@ -11,8 +11,10 @@
 
   [type="text"],
   [type="password"],
-  textarea {
-    @apply w-full border-2 border-blue-400 text-blue-800 rounded-md focus:ring-2 focus:ring-blue-300 focus:border-blue-700 dark:bg-gray-800 dark:border-blue-700 dark:focus:ring-blue-600
+  [type="email"],
+  textarea,
+  select {
+    @apply w-full border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 focus:border-blue-700 dark:bg-gray-800 dark:border-blue-700 dark:focus:ring-blue-600
   }
 
   h1 {
@@ -40,11 +42,17 @@
   }
 
   button {
-    @apply border rounded-md border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold dark:bg-blue-500 dark:hover:bg-blue-300 px-4
+    @apply border rounded-md border-gray-500 text-center w-full py-2 hover:bg-gray-500 hover:text-white transition-colors font-bold dark:bg-gray-500 dark:hover:bg-gray-300 px-4
+      disabled:bg-gray-400 disabled:hover:bg-gray-200 disabled:cursor-not-allowed
   }
 
   .btn {
-    @apply border rounded-md border-blue-500 text-center w-full py-2 hover:bg-blue-500 hover:text-white transition-colors font-bold dark:bg-blue-500 dark:hover:bg-blue-300 px-4
+    @apply border rounded-md border-gray-500 text-center w-full py-2 hover:bg-gray-500 hover:text-white transition-colors font-bold dark:bg-gray-500 dark:hover:bg-gray-300 px-4
+      disabled:bg-gray-400 disabled:hover:bg-gray-200 disabled:cursor-not-allowed
+  }
+
+  input[type=checkbox] {
+    @apply rounded
   }
 
   table {
@@ -59,8 +67,28 @@
 
 @layer components {
 
-  .fl {
-    @apply block text-gray-500
+  .form-label {
+    @apply block text-gray-500 font-semibold
+  }
+
+  .btn-p {
+    @apply border-blue-500 hover:bg-blue-500 hover:text-white dark:bg-blue-500 dark:hover:bg-blue-300
+  }
+
+  .btn-d {
+    @apply border-red-500 hover:bg-red-500 hover:text-white dark:bg-red-500 dark:hover:bg-red-300
+  }
+
+  .btn-w {
+    @apply border-yellow-500 hover:bg-yellow-500 hover:text-white dark:bg-yellow-500 dark:hover:bg-yellow-300
+  }
+
+  .btn-s {
+    @apply border-green-500 hover:bg-green-500 hover:text-white dark:bg-green-500 dark:hover:bg-green-300
+  }
+
+  .form-error-msg {
+    @apply text-red-500 text-xs pt-1
   }
 
 }

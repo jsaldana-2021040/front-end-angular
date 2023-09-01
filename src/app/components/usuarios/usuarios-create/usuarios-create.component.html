@@ -1,0 +1,27 @@
+<page-header icono="users" nombrePagina="Usuario: Agregar" [mostrarBtnAgregar]="false" />
+
+
+<div class="flex justify-center">
+  <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+    <div>
+      <label for="email" class="form-label">Email</label>
+      <input formControlName="email" id="email" name="email" type="email">
+      <app-form-errors [formControl]="usuario.controls.email"/>
+    </div>
+
+    <div>
+      <label for="password" class="form-label">Password</label>
+      <input formControlName="password" id="password" name="password" type="password">
+      <app-form-errors [formControl]="usuario.controls.password"/>
+    </div>
+
+    <div class="flex grid-cols-2 gap-x-2">
+      <button type="submit" class="btn-p" [disabled]="enviandoDatos || usuario.invalid">
+        <i class="fas fa-save"></i> Guardar
+      </button>
+      <button type="button" class="btn-d" routerLink="..">
+        <i class="fas fa-times"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</div>

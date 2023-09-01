@@ -1,0 +1,29 @@
+<div *ngIf="formControl!.invalid">
+  <ul class="fa-ul relative -left-4">
+
+    <li *ngIf="formControl!.errors!['required']" class="form-error-msg">
+      <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
+      Campo obligatorio
+    </li>
+
+    <li *ngIf="formControl!.errors!['minlength']" class="form-error-msg">
+      <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
+      No menos de {{formControl!.errors!['minlength'].requiredLength}} caracteres
+    </li>
+
+    <li *ngIf="formControl!.errors!['maxlength']" class="form-error-msg">
+      <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
+      No más de {{formControl!.errors!['maxlength'].requiredLength}}
+    </li>
+
+    <li *ngIf="formControl!.errors!['email']" class="form-error-msg">
+      <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
+      No es un correo válido
+    </li>
+
+    <li *ngIf="formControl!.errors!['pattern']" class="form-error-msg">
+      <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
+      No se permite el tipo de dato
+    </li>
+  </ul>  
+</div>
