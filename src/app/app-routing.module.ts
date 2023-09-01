@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, provideRouter, withComponentInputBinding } from '@angular/router';
 import { FormularioBaseComponent } from './formulario-base/formulario-base.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -26,6 +26,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [provideRouter(routes, withComponentInputBinding())]
 })
 export class AppRoutingModule { }
