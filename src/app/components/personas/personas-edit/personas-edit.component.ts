@@ -1,22 +1,23 @@
-import { Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, Input, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PersonasService } from 'src/app/shared/services/personas.service';
-import { EmpresasService } from 'src/app/shared/services/empresas.service';
+import { Subscription } from 'rxjs';
 import { Empresas } from 'src/app/shared/interfaces/empresas';
-import { Subscription} from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EmpresasService } from 'src/app/shared/services/empresas.service';
+import { PersonasService } from 'src/app/shared/services/personas.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-personas-create',
-  templateUrl: './personas-create.component.html',
+  selector: 'app-personas-edit',
+  templateUrl: './personas-edit.component.html',
   styles: [
   ]
 })
+export class PersonasEditComponent {
 
-export class PersonasCreateComponent implements OnInit {
-
+  @Input() id: number = 0;
+  
   listEmpresas: Empresas[] = [];
   enviandoDatos: boolean = false;
   suscripcion: Subscription | null = null
@@ -27,7 +28,7 @@ export class PersonasCreateComponent implements OnInit {
     nombres: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(100), Validators.minLength(3)] }),
     apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     tieneVisa: new FormControl<boolean>(false, { nonNullable: true }),
-    empresaCod: new FormControl<number | null>(null, { nonNullable: true, validators: Validators.required })
+    empresaCod: new FormControl<number | undefined >(undefined, { nonNullable: true, validators: Validators.required })
   });
 
   constructor(
@@ -49,6 +50,11 @@ export class PersonasCreateComponent implements OnInit {
       next: res => this.listEmpresas = res,
       error: err => console.log('Error al obtener datos')
     });
+
+    this.personasSvc.getId(this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: res => this.persona.patchValue(res),
+      error: err => console.log('Error al obtener datos')
+    });
   }
 
   onSubmit(): void {
@@ -60,8 +66,8 @@ export class PersonasCreateComponent implements OnInit {
 
     this.enviandoDatos = true;
 
-    this.suscripcion = this.personasSvc.post(this.persona.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: res => this.router.navigate(['..'], { relativeTo: this.route }),
+    this.suscripcion = this.personasSvc.put(this.persona.value, this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: res => this.router.navigate(['../..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');
         this.enviandoDatos = false;

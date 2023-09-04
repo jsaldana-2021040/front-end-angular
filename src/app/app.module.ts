@@ -19,6 +19,15 @@ import { PersonasCreateComponent } from './components/personas/personas-create/p
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsuariosCreateComponent } from './components/usuarios/usuarios-create/usuarios-create.component';
 import { FormErrorsComponent } from './shared/form-errors/form-errors.component';
+import { EmpresasEditComponent } from './components/empresas/empresas-edit/empresas-edit.component';
+import { PersonasEditComponent } from './components/personas/personas-edit/personas-edit.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CommonModule } from '@angular/common';
+
+import { ToastrModule } from 'ngx-toastr';
+import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +46,20 @@ import { FormErrorsComponent } from './shared/form-errors/form-errors.component'
     PersonasCreateComponent,
     UsuariosCreateComponent,
     FormErrorsComponent,
+    EmpresasEditComponent,
+    PersonasEditComponent,
+    UsuariosEditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      autoDismiss: true
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

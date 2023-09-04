@@ -10,6 +10,9 @@ import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuar
 import { EmpresasCreateComponent } from './components/empresas/empresas-create/empresas-create.component';
 import { PersonasCreateComponent } from './components/personas/personas-create/personas-create.component';
 import { UsuariosCreateComponent } from './components/usuarios/usuarios-create/usuarios-create.component';
+import { EmpresasEditComponent } from './components/empresas/empresas-edit/empresas-edit.component';
+import { PersonasEditComponent } from './components/personas/personas-edit/personas-edit.component';
+import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,10 +20,13 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'empresas', component: EmpresasListComponent },
   { path: 'empresas/agregar', component: EmpresasCreateComponent },
+  { path: 'empresas/editar/:id', component: EmpresasEditComponent },
   { path: 'personas', component: PersonasListComponent },
   { path: 'personas/agregar', component: PersonasCreateComponent },
+  { path: 'personas/editar/:id', component: PersonasEditComponent },
   { path: 'usuarios', component: UsuariosListComponent },
   { path: 'usuarios/agregar', component: UsuariosCreateComponent },
+  { path: 'usuarios/editar/:id', component: UsuariosEditComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

@@ -26,6 +26,18 @@ export class UsuariosService {
     );
   }
 
+  put(body: Partial<Usuarios>, id: number): Observable<Usuarios> {
+    return this.http.put<Usuarios>(this.url + `/${id}`, body).pipe(
+      first()
+    );
+  }
+
+  delete(id: number): Observable<Usuarios> {
+    return this.http.delete<Usuarios>(this.url + `/${id}`).pipe(
+      first()
+    );
+  }
+
   getId(id: number): Observable<Usuarios> {
     return this.http.get<Usuarios>(this.url + `/${id}`).pipe(
       first()

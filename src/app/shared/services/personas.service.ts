@@ -26,6 +26,18 @@ export class PersonasService {
     );
   }
 
+  put(body: Partial<Personas>, id: number): Observable<Personas> {
+    return this.http.put<Personas>(this.url + `/${id}`, body).pipe(
+      first()
+    );
+  }
+
+  delete(id: number): Observable<Personas> {
+    return this.http.delete<Personas>(this.url + `/${id}`).pipe(
+      first()
+    );
+  }
+
   getId(id: number): Observable<Personas> {
     return this.http.get<Personas>(this.url + `/${id}`).pipe(
       first()

@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresasService } from 'src/app/shared/services/empresas.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-empresas-create',
-  templateUrl: './empresas-create.component.html',
+  selector: 'app-empresas-edit',
+  templateUrl: './empresas-edit.component.html',
   styles: [
   ]
 })
+export class EmpresasEditComponent implements OnInit {
 
-export class EmpresasCreateComponent {
+  @Input() id: number = 0;
 
   enviandoDatos: boolean = false;
 
@@ -29,10 +30,21 @@ export class EmpresasCreateComponent {
   ) { }
 
   showSuccess() {
-    this.toastr.success('Creado con exito', 'Todo bien', {
-      positionClass:"toast-bottom-right", toastClass:"ngx-toastr  "
+    this.toastr.success('Editado con exito', 'Todo bien', {
+      positionClass:"toast-bottom-right"
     });
   }
+
+  ngOnInit(): void {
+    this.empresasSvc.getId(this.id).subscribe({
+      next: res => this.empresa.patchValue(res),
+      error: err => {
+        console.log('Error al obtener la empresa');
+        this.enviandoDatos = false;
+      }
+    })
+  }
+
 
   onSubmit(): void {
 
@@ -43,13 +55,13 @@ export class EmpresasCreateComponent {
     }
 
     this.enviandoDatos = true;
-    this.empresasSvc.post(this.empresa.value).subscribe({
-      next: res => this.router.navigate(['..'], { relativeTo: this.route }),
+    this.empresasSvc.put(this.empresa.value, this.id).subscribe({
+      next: res => this.router.navigate(['../..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');
         this.enviandoDatos = false;
       }
-    })
+    });
     this.showSuccess()
   }
 }

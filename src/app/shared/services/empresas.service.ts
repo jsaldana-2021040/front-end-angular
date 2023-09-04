@@ -26,6 +26,18 @@ export class EmpresasService {
     );
   }
 
+  put(body: Partial<Empresas>, id: number): Observable<Empresas> {
+    return this.http.put<Empresas>(this.url + `/${id}`, body).pipe(
+      first()
+    );
+  }
+
+  delete(id: number): Observable<Empresas> {
+    return this.http.delete<Empresas>(this.url + `/${id}`).pipe(
+      first()
+    );
+  }
+
   getId(id: number): Observable<Empresas> {
     return this.http.get<Empresas>(this.url + `/${id}`).pipe(
       first()

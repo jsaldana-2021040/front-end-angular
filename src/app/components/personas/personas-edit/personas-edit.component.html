@@ -1,0 +1,40 @@
+<page-header icono="user" nombrePagina="Personas: Agregar" [mostrarBtnAgregar]="false" />
+
+
+<div class="flex justify-center">
+  <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="persona" (submit)="onSubmit()" autocomplete="off">
+    <div>
+      <label for="nombres" class="form-label">Nombres</label>
+      <input formControlName="nombres" id="nombres" name="nombres" type="text">
+      <app-form-errors [control]="persona.controls.nombres"/>
+    </div>
+
+    <div>
+      <label for="apellidos" class="form-label">Apellidos</label>
+      <input formControlName="apellidos" id="apellidos" name="apellidos" type="text">
+      <app-form-errors [control]="persona.controls.apellidos"/>
+    </div>
+
+    <div>
+      <label for="empresas" class="form-label">Empresas:</label>
+      <select name="empresas" id="empresas" formControlName="empresaCod">
+        <option *ngFor="let item of listEmpresas" [ngValue]="item.codEmpresa">{{item.nombre}}</option>
+      </select>
+      <app-form-errors [control]="persona.controls.empresaCod"/>
+    </div>
+    
+    <div>
+      <label for="tieneVisa" class="form-label">Visa</label>
+      <input formControlName="tieneVisa" id="tieneVisa" name="tieneVisa" type="checkbox">
+    </div>
+
+    <div class="flex grid-cols-2 gap-x-2">
+      <button type="submit" class="btn-p" [disabled]="enviandoDatos || persona.invalid">
+        <i class="fas fa-save"></i> Guardar
+      </button>
+      <button type="button" class="btn-d" routerLink="../..">
+        <i class="fas fa-times"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</div>
