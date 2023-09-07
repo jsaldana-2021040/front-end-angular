@@ -16,7 +16,6 @@ export class PersonasListComponent implements OnInit {
 
   constructor(
     private personasSvc: PersonasService,
-    private router: Router,
     private toastr: ToastrService,
   ) { }
 
