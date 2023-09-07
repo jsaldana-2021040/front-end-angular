@@ -10,11 +10,11 @@
 
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a routerLink="/empresas" class="navbar-link">Empresas</a>
-            <a routerLink="/personas" class="navbar-link">Personas</a>
-            <a routerLink="/usuarios" class="navbar-link">usuarios</a>
-            <a routerLink="/formulario-base" class="navbar-link">Formulario</a>
-            <a routerLink="/about" class="navbar-link">About</a>
+            <a routerLink="/empresas" class="navbar-link hover:-translate-y-1 transition-all">Empresas</a>
+            <a routerLink="/personas" class="navbar-link hover:-translate-y-1 transition-all">Personas</a>
+            <a routerLink="/usuarios" class="navbar-link hover:-translate-y-1 transition-all">usuarios</a>
+            <a routerLink="/formulario-base" class="navbar-link hover:-translate-y-1 transition-all">Formulario</a>
+            <a routerLink="/about" class="navbar-link hover:-translate-y-1 transition-all">About</a>
           </div>
         </div>
       </div>
@@ -27,6 +27,11 @@
         </div>
       </label>
       <i class="fas text-gray-200 fa-lg fa-moon ml-2"></i>
+      <div class="flex">
+        <button class="btn-w ml-5 md:ml-20 bg-yellow-400 hover:-translate-y-1 transition-all" routerLink="login" [ngClass]="login ? 'hidden': ''">Register</button>
+        <button class="btn-w ml-5 mr-2 md:mr-0 bg-yellow-400 hover:-translate-y-1 transition-all" routerLink="login" [ngClass]="login ? 'hidden': ''">Login</button>
+        <button class="btn-w ml-6 bg-yellow-400 hover:-translate-y-1 transition-all" (click)="logOut()" [ngClass]="login ? '': 'hidden'">Log out</button>
+      </div>
     </div>
   </div>
 </nav>

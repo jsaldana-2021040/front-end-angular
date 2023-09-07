@@ -1,8 +1,8 @@
 <page-header icono="user" nombrePagina="Personas: Agregar" [mostrarBtnAgregar]="false" />
 
-
-<div class="flex justify-center">
-  <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="persona" (submit)="onSubmit()" autocomplete="off">
+<div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+  <form class="space-y-6" [formGroup]="persona" (submit)="onSubmit()" autocomplete="off">
     <div>
       <label for="nombres" class="form-label">Nombres</label>
       <input formControlName="nombres" id="nombres" name="nombres" type="text">
@@ -29,10 +29,10 @@
     </div>
 
     <div class="flex grid-cols-2 gap-x-2">
-      <button type="submit" class="btn-p" [disabled]="enviandoDatos || persona.invalid">
+      <button type="submit" class="btn-p hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || persona.invalid">
         <i class="fas fa-save"></i> Guardar
       </button>
-      <button type="button" class="btn-d" routerLink="..">
+      <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="..">
         <i class="fas fa-times"></i> Cancelar
       </button>
     </div>

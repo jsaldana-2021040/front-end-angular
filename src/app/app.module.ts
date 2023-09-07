@@ -28,6 +28,7 @@ import { CommonModule } from '@angular/common';
 
 import { ToastrModule } from 'ngx-toastr';
 import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
+import { LoginComponent } from './components/login/login/login.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuar
     EmpresasEditComponent,
     PersonasEditComponent,
     UsuariosEditComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

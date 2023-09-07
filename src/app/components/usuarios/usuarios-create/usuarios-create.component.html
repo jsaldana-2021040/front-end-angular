@@ -1,8 +1,8 @@
 <page-header icono="users" nombrePagina="Usuario: Agregar" [mostrarBtnAgregar]="false" />
 
-
-<div class="flex justify-center">
-  <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+<div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+  <form class="space-y-6" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
     <div>
       <label for="email" class="form-label">Email</label>
       <input formControlName="email" id="email" name="email" type="email">
@@ -16,10 +16,10 @@
     </div>
 
     <div class="flex grid-cols-2 gap-x-2">
-      <button type="submit" class="btn-p" [disabled]="enviandoDatos || usuario.invalid">
+      <button type="submit" class="btn-p hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
         <i class="fas fa-save"></i> Guardar
       </button>
-      <button type="button" class="btn-d" routerLink="..">
+      <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="..">
         <i class="fas fa-times"></i> Cancelar
       </button>
     </div>

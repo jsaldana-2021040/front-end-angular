@@ -7,33 +7,36 @@ import { Empresas } from '../interfaces/empresas';
   providedIn: 'root'
 })
 export class EmpresasService {
-   
+
   url: string = 'http://localhost:5000/empresas'
+  
+  headers = { 'Authorization': 'Bearer '+ localStorage.getItem('token')}
 
   constructor(
     private http: HttpClient
   ) { }
 
   get(): Observable<Empresas[]> {
-    return this.http.get<Empresas[]>(this.url).pipe(
+    
+    return this.http.get<Empresas[]>(this.url, {headers: this.headers}).pipe(
       first()
     );
   }
 
   post(body: Partial<Empresas>): Observable<Empresas> {
-    return this.http.post<Empresas>(this.url, body).pipe(
+    return this.http.post<Empresas>(this.url, body, {headers: this.headers}).pipe(
       first()
     );
   }
 
   put(body: Partial<Empresas>, id: number): Observable<Empresas> {
-    return this.http.put<Empresas>(this.url + `/${id}`, body).pipe(
+    return this.http.put<Empresas>(this.url + `/${id}`, body, {headers: this.headers}).pipe(
       first()
     );
   }
 
   delete(id: number): Observable<Empresas> {
-    return this.http.delete<Empresas>(this.url + `/${id}`).pipe(
+    return this.http.delete<Empresas>(this.url + `/${id}`, {headers: this.headers}).pipe(
       first()
     );
   }

@@ -13,9 +13,11 @@ import { UsuariosCreateComponent } from './components/usuarios/usuarios-create/u
 import { EmpresasEditComponent } from './components/empresas/empresas-edit/empresas-edit.component';
 import { PersonasEditComponent } from './components/personas/personas-edit/personas-edit.component';
 import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
+import { LoginComponent } from './components/login/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'formulario-base', component: FormularioBaseComponent },
   { path: 'about', component: AboutComponent },
   { path: 'empresas', component: EmpresasListComponent },

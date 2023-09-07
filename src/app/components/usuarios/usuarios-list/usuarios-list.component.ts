@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styles: [
   ]
 })
+
 export class UsuariosListComponent implements OnInit {
   listUsuarios: Usuarios[] = [];
 
@@ -16,6 +17,13 @@ export class UsuariosListComponent implements OnInit {
     private usuariosSvc: UsuariosService,
     private toastr: ToastrService,
   ) { }
+
+  ngOnInit(): void {
+    this.usuariosSvc.get().subscribe({
+      next: res => this.listUsuarios = res,
+      error: err => console.log('Error al obtener datos')
+    });
+  }
 
   showSuccess() {
     this.toastr.success('Eliminado con exito', 'Todo bien', {
@@ -38,12 +46,5 @@ export class UsuariosListComponent implements OnInit {
       }
     });
     this.showSuccess()
-  }
-
-  ngOnInit(): void {
-    this.usuariosSvc.get().subscribe({
-      next: res => this.listUsuarios = res,
-      error: err => console.log('Error al obtener datos')
-    });
   }
 }
