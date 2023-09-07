@@ -6,22 +6,13 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 export class SystemService {
   
   private isLoged = signal(false);
-
-  getDarkMode() : boolean{
-    if (localStorage.getItem('mode')) {
-      document.documentElement.classList.add('dark');
-      return true;
-    }
-    return false
-  }
-
   isDark: boolean = this.getDarkMode();
 
   constructor() { }
 
-  isLogedIn(): boolean {
+  initLoged(): void {
     const token = this.getToken();
-    return (token != null);
+    this.setStatusLoged((token != null));
   }
 
   getToken(): string | null {
@@ -36,8 +27,8 @@ export class SystemService {
     return this.isLoged;
   }
 
-  turnSystemTheme(): void {
-    if (this.isDark) {
+  setThemeMode(isDark: boolean): void {
+    if (!isDark) {
       document.documentElement.classList.remove('dark');
       localStorage.removeItem('mode')
     } else {
@@ -45,7 +36,14 @@ export class SystemService {
       let modo = localStorage.getItem('mode')
       document.documentElement.classList.add(modo!);
     }
-    this.isDark = !this.isDark
+  }
+  
+  getDarkMode() : boolean{
+    if (localStorage.getItem('mode')) {
+      document.documentElement.classList.add('dark');
+      return true;
+    }
+    return false
   }
 
 }

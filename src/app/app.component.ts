@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SystemService } from './shared/services/system.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'frontend';
 
-  texto = ''
+  constructor (
+    private systemSvc: SystemService
+  ) { }
 
-
-  mostrarContenido: boolean = false;
-
-  confirmarFormulario(): void {
-    this.texto += '1'
-    this.mostrarContenido = !this.mostrarContenido;
+  ngOnInit(): void {
+    this.systemSvc.initLoged();
   }
 }
+
