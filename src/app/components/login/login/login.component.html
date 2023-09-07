@@ -1,10 +1,12 @@
 
-<h1 class="flex justify-center mt-10 mb-10">Login</h1>
 <div class="block sm:flex sm:justify-center p-5">
   
-  <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=2000" class="sm:h-96 sm:w-96">
+  <div class="pt-28 text-center md:mr-16">
+    <i class="fa-regular fa-circle-user text-9xl mb-5"></i>
+    <h1>Login</h1>
+  </div>
   
-  <form class="space-y-4 w-full sm:max-w-sm pt-20" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+  <form class="space-y-4 w-full sm:max-w-sm pt-20 md:pl-10" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
     <div>
       <label for="email" class="form-label">Email</label>
       <input formControlName="email" id="email" name="email" type="email">
@@ -18,7 +20,7 @@
     </div>
 
     <div class="flex grid-cols-2 gap-x-2">
-      <button type="submit" class="btn-p" [disabled]="enviandoDatos || usuario.invalid">
+      <button type="submit" class="btn-p enabled:hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
         <i class="fa-solid fa-check"></i> Aceptar
       </button>
     </div>

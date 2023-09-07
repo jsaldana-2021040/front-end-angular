@@ -7,7 +7,15 @@ export class SystemService {
   
   private isLoged = signal(false);
 
-  isDark: boolean = false;
+  getDarkMode() : boolean{
+    if (localStorage.getItem('mode')) {
+      document.documentElement.classList.add('dark');
+      return true;
+    }
+    return false
+  }
+
+  isDark: boolean = this.getDarkMode();
 
   constructor() { }
 
@@ -31,8 +39,11 @@ export class SystemService {
   turnSystemTheme(): void {
     if (this.isDark) {
       document.documentElement.classList.remove('dark');
+      localStorage.removeItem('mode')
     } else {
-      document.documentElement.classList.add('dark');
+      localStorage.setItem('mode', 'dark')
+      let modo = localStorage.getItem('mode')
+      document.documentElement.classList.add(modo!);
     }
     this.isDark = !this.isDark
   }

@@ -1,5 +1,5 @@
 footer{
-  @apply absolute bottom-0 left-0 right-0 bg-black h-24 w-auto text-white
+  @apply absolute bottom-0 left-0 right-0 bg-gray-800 h-24 w-auto text-white
 }
 
 .footer-content{
@@ -15,7 +15,7 @@ footer{
 }
 
 .footer-bottom{
-  @apply bg-black w-auto p-5 text-center
+  @apply bg-gray-800 w-auto p-5 text-center
 }
 
 .footer-bottom p{

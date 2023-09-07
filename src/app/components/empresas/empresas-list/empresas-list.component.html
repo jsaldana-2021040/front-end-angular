@@ -10,7 +10,7 @@
       <th class="p-3 text-center">Activo</th>
       <th></th>
     </tr>
-    <tr *ngFor="let item of listEmpresas; even as e" class="even:bg-slate-100 border-slate-700">
+    <tr *ngFor="let item of listEmpresas; even as e" class="even:bg-slate-100 border-slate-700 dark:even:bg-slate-800 dark:odd:bg-slate-700">
       <td class="pl-3">{{item.codEmpresa}}</td>
       <td class="pl-3">{{item.nombre}}</td>
       <td class="pl-3">{{item.direccion}}</td>
