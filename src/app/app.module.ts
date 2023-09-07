@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
 import { LoginComponent } from './components/login/login/login.component';
+import { TokenInterceptorInterceptor } from './shared/utils/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,9 @@ import { LoginComponent } from './components/login/login/login.component';
       autoDismiss: true
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Observable, catchError, first, throwError } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
