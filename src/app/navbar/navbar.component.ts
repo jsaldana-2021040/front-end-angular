@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SystemService } from '../shared/services/system.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,17 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  login = false
 
-  token = localStorage.getItem('token')
+  constructor (
+    private systemSvc: SystemService
+  ) { }
   
   ngOnInit(): void {
-    if (this.token != null) {
-      this.login = true
-    }
   }
 
   logOut(): void {
     localStorage.removeItem('token');
+    this.systemSvc.setStatusLoged(false);
+  }
+
+  changeTheme(): void {
+    this.systemSvc.turnSystemTheme();
+  }
+
+  get isLoged() {
+    return this.systemSvc.getStatusLoged();
   }
 }

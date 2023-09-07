@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { SystemService } from 'src/app/shared/services/system.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
     private loginSvc: LoginService,
     private router: Router,
     private toastr: ToastrService,
+    private systemSvc: SystemService
   ) { }
 
   usuario = new FormGroup({
@@ -50,6 +52,7 @@ export class LoginComponent {
       ).subscribe({
         next: res => {
           localStorage.setItem('token', res)
+          this.systemSvc.setStatusLoged(true);
           this.router.navigate(['']);
         },
         error: err => {
