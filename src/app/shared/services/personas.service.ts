@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, first } from 'rxjs';
 import { Personas } from '../interfaces/personas';
+import { Paginado } from '../interfaces/paginado';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,14 @@ export class PersonasService {
     private http: HttpClient
   ) { }
 
-  get(): Observable<Personas[]> {
-    return this.http.get<Personas[]>(this.url).pipe(
+  get(params: HttpParams): Observable<Personas[]> {
+    return this.http.get<Personas[]>(this.url, { params: params }).pipe(
+      first()
+    );
+  }
+
+  getpg(params: HttpParams): Observable<Paginado<Personas>> {
+    return this.http.get<Paginado<Personas>>(this.url + '/pg', { params: params }).pipe(
       first()
     );
   }

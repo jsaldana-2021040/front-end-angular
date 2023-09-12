@@ -1,5 +1,39 @@
 <page-header icono="user" nombrePagina="Personas" />
 
+<form [formGroup]="filtros" (submit)="cargar(1)">
+  <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5">
+    <div class="w-full">
+      <label for="nombres" class="form-label">Nombres</label>
+      <input formControlName="nombres" id="nombres" name="nombres" type="text">
+    </div>
+    <div class="w-full">
+      <label for="apellidos" class="form-label">Apellidos</label>
+      <input formControlName="apellidos" id="apellidos" name="apellidos" type="text">
+    </div>
+    <div class="w-full">
+      <label for="tieneVisa" class="form-label">Tiene visa</label>
+      <select formControlName="tieneVisa" name="tieneVisa" id="tieneVisa">
+        <option [ngValue]="null">Todos</option>
+        <option [ngValue]="true">Si</option>
+        <option [ngValue]="false">No</option>
+      </select>
+    </div>
+    <div class="w-full">
+      <label for="activo" class="form-label">Activo</label>
+      <select formControlName="activo" name="activo" id="activo">
+        <option [ngValue]="null">Todos</option>
+        <option [ngValue]="true">Si</option>
+        <option [ngValue]="false">No</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="direccion" class="form-label">&nbsp;</label>
+      <button type="submit" class="btn-p">Filtrar</button>
+    </div>
+  </div>
+</form>
+
 <div class="rounded overflow-hidden w-auto overflow-x-scroll m-4 md:overflow-x-auto">
   <table>
     <tr class="bg-violet-800 bg-opacity-40 text-base">
@@ -12,7 +46,7 @@
       <th class="p-3 text-center pr-5">Activo</th>
       <th></th>
     </tr>
-    <tr *ngFor="let item of listPersonas" class="even:bg-slate-200 odd:bg-slate-50 border-slate-700 dark:even:bg-slate-800 dark:odd:bg-slate-700">
+    <tr *ngFor="let item of pgPersonas.items" class="even:bg-slate-200 odd:bg-slate-50 border-slate-700 dark:even:bg-slate-800 dark:odd:bg-slate-700">
       <td class="pl-3 pr-7">{{item.codPersona}}</td>
       <td class="pl-3 pr-7">{{item.nombres}}</td>
       <td class="pl-3 pr-7">{{item.apellidos}}</td>
@@ -37,3 +71,5 @@
     </tr>
   </table>
 </div>
+
+<app-paginador [CantPaginas]="pgPersonas.pages" [pagActual]="pgPersonas.page" (cambioPagina)="cargar($event)"></app-paginador>

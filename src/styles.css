@@ -43,8 +43,8 @@
   }
 
   button {
-    @apply border rounded-md border-gray-500 text-center w-full py-2 hover:bg-gray-500 hover:text-white transition-colors font-bold dark:bg-gray-500 dark:hover:bg-gray-300 px-4
-      disabled:bg-gray-400 disabled:hover:bg-gray-200 disabled:cursor-not-allowed
+    @apply border rounded-md border-gray-400 bg-gray-400 text-center w-full py-2 hover:bg-slate-100 hover:text-gray-500 transition-colors font-bold dark:bg-gray-500 dark:border-gray-500 dark:hover:bg-slate-50 px-4
+      disabled:bg-gray-400 disabled:border-gray-400 disabled:hover:bg-gray-200 disabled:cursor-not-allowed
   }
 
   .btn {
@@ -69,7 +69,7 @@
 @layer components {
 
   .form-label {
-    @apply block text-slate-600 font-semibold dark:text-slate-100
+    @apply block text-slate-600 font-semibold dark:text-slate-100 mb-1
   }
 
   .btn-p {

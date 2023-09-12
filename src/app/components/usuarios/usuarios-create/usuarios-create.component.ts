@@ -12,7 +12,7 @@ import { UsuariosService } from 'src/app/shared/services/usuarios.service';
   styles: [
   ]
 })
-export class UsuariosCreateComponent implements OnInit {
+export class UsuariosCreateComponent {
 
   listUsuarios: Usuarios[] = [];
   enviandoDatos: boolean = false;
@@ -30,13 +30,6 @@ export class UsuariosCreateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) { }
-
-  ngOnInit(): void {
-    this.usuariosSvc.get().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: res => this.listUsuarios = res,
-      error: err => console.log('Error al obtener datos')
-    });
-  }
 
   onSubmit(): void {
     if (this.usuario.invalid) {

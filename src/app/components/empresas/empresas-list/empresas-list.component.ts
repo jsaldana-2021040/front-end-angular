@@ -14,11 +14,10 @@ import { Paginado } from 'src/app/shared/interfaces/paginado';
   styles: [
   ]
 })
+
 export class EmpresasListComponent implements OnInit {
 
-  cambios: number = 0;
-
-  pgEmpresas = new Paginado<Empresas>
+  pgEmpresas = new Paginado<Empresas>();
 
   filtros = new FormGroup({
     nombre: new FormControl<string | null>(''),
@@ -43,16 +42,11 @@ export class EmpresasListComponent implements OnInit {
   ngOnInit(): void {
     this.cargar(1);
 
-    this.filtros.valueChanges.subscribe(() => this.cargar(1));
-  }
-
-  setearCambios(): void {
-    this.cambios++
-    this.filtros.controls.nombre.setValue(String(this.cambios));
+    this.filtros.controls.activo.valueChanges.subscribe(() => this.cargar(1));
   }
 
   cargar(pagina: number): void {
-    let params = new HttpParams().append('pagina', pagina);
+    let params = new HttpParams().append('pagina', pagina).append('porPagina', 2);
 
     for (const key in this.filtros.controls) {
       if (this.filtros.get(key)!.value !== null && this.filtros.get(key)!.value !== '') {

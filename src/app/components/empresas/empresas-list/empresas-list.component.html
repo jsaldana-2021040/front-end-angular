@@ -1,20 +1,20 @@
 <page-header icono="city" nombrePagina="Empresas" />
 
 <form [formGroup]="filtros" (submit)="cargar(1)">
-  <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7">
-    <div class="w-72">
+  <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5">
+    <div class="w-full">
       <label for="nombre" class="form-label">Nombre</label>
       <input formControlName="nombre" id="nombre" name="nombre" type="text">
     </div>
-    <div class="w-72">
+    <div class="w-full">
       <label for="direccion" class="form-label">Direccion</label>
       <input formControlName="direccion" id="direccion" name="direccion" type="text">
     </div>
-    <div class="w-72">
+    <div class="w-full">
       <label for="telefono" class="form-label">Telefono</label>
       <input formControlName="telefono" id="telefono" name="telefono" type="text">
     </div>
-    <div class="w-72">
+    <div class="w-full">
       <label for="activo" class="form-label">Activo</label>
       <select formControlName="activo" name="activo" id="activo">
         <option [ngValue]="null">Todos</option>
@@ -29,7 +29,6 @@
     </div>
   </div>
 </form>
-
 
 <div class="rounded overflow-hidden w-auto overflow-x-scroll m-4 md:overflow-x-auto">
   <table>
@@ -61,3 +60,5 @@
     </tr>
   </table>
 </div>
+
+<app-paginador [CantPaginas]="pgEmpresas.pages" [pagActual]="pgEmpresas.page" (cambioPagina)="cargar($event)"></app-paginador>

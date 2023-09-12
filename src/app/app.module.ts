@@ -30,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { TokenInterceptorInterceptor } from './shared/utils/token-interceptor.interceptor';
+import { PaginadorComponent } from './shared/components/paginador/paginador.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { TokenInterceptorInterceptor } from './shared/utils/token-interceptor.in
     PersonasEditComponent,
     UsuariosEditComponent,
     LoginComponent,
+    PaginadorComponent,
   ],
   imports: [
     BrowserModule,
