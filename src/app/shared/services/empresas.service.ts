@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, first } from 'rxjs';
 import { Empresas } from '../interfaces/empresas';
+import { Paginado } from '../interfaces/paginado';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,12 @@ export class EmpresasService {
 
   get(params: HttpParams): Observable<Empresas[]> {
     return this.http.get<Empresas[]>(this.url, { params: params }).pipe(
+      first()
+    );
+  }
+
+  getPg(params: HttpParams): Observable<Paginado<Empresas>> {
+    return this.http.get<Paginado<Empresas>>(this.url + '/pg', { params: params }).pipe(
       first()
     );
   }

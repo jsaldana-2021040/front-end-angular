@@ -1,6 +1,6 @@
 <page-header icono="city" nombrePagina="Empresas" />
 
-<form [formGroup]="filtros" (submit)="cargar()">
+<form [formGroup]="filtros" (submit)="cargar(1)">
   <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7">
     <div class="w-72">
       <label for="nombre" class="form-label">Nombre</label>
@@ -41,7 +41,7 @@
       <th class="p-3 text-center">Activo</th>
       <th></th>
     </tr>
-    <tr *ngFor="let item of listEmpresas"
+    <tr *ngFor="let item of pgEmpresas.items"
       class="even:bg-slate-200 odd:bg-slate-50 border-slate-700 dark:even:bg-slate-800 dark:odd:bg-slate-700">
       <td class="pl-3">{{item.codEmpresa}}</td>
       <td class="pl-3">{{item.nombre}}</td>

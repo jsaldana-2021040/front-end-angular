@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpParams } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Paginado } from 'src/app/shared/interfaces/paginado';
 
 
 @Component({
@@ -15,7 +16,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class EmpresasListComponent implements OnInit {
 
-  listEmpresas: Empresas[] = [];
+  cambios: number = 0;
+
+  pgEmpresas = new Paginado<Empresas>
 
   filtros = new FormGroup({
     nombre: new FormControl<string | null>(''),
@@ -33,41 +36,39 @@ export class EmpresasListComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('Eliminado con exito', 'Todo bien', {
-      positionClass:"toast-bottom-right"
+      positionClass: "toast-bottom-right"
     });
   }
 
   ngOnInit(): void {
-    this.cargar();
+    this.cargar(1);
+
+    this.filtros.valueChanges.subscribe(() => this.cargar(1));
   }
 
-  cargar() : void{
-    let params = new HttpParams();
-    
+  setearCambios(): void {
+    this.cambios++
+    this.filtros.controls.nombre.setValue(String(this.cambios));
+  }
+
+  cargar(pagina: number): void {
+    let params = new HttpParams().append('pagina', pagina);
+
     for (const key in this.filtros.controls) {
-
-      let values = this.filtros.get(key)!.value 
-      
-      if (values != null) {
-        values = String(this.filtros.get(key)!.value)
-      }
-
-      console.log(values);
-      
-      if (values) {        
-        params = params.append(key, this.filtros.get(key)!.value)  
+      if (this.filtros.get(key)!.value !== null && this.filtros.get(key)!.value !== '') {
+        params = params.append(key, this.filtros.get(key)!.value);
       }
     }
 
-    this.empresasSvc.get(params).subscribe({
-      next: res => this.listEmpresas = res,
+    this.empresasSvc.getPg(params).subscribe({
+      next: res => this.pgEmpresas = res,
       error: err => console.log('Error al obtener datos')
     });
   }
 
-  delete(id: number) : void{
+  delete(id: number): void {
     this.empresasSvc.delete(id).subscribe({
-      next: res => {this.cargar()},
+      next: res => { this.cargar(1); },
       error: err => {
         console.log('Error al insertar datos');
       }

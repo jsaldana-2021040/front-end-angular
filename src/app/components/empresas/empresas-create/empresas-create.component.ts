@@ -52,6 +52,9 @@ export class EmpresasCreateComponent {
       next: res => this.router.navigate(['..'], { relativeTo: this.route }),
       error: err => {
         this.enviandoDatos = false;
+        this.toastr.error('Error', '', {
+          positionClass:"toast-bottom-right", toastClass:"ngx-toastr  "
+        });
       },
       complete: () => this.showSuccess()
     });
