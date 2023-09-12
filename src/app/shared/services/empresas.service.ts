@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, first } from 'rxjs';
 import { Empresas } from '../interfaces/empresas';
 
@@ -14,9 +14,8 @@ export class EmpresasService {
     private http: HttpClient
   ) { }
 
-  get(): Observable<Empresas[]> {
-    
-    return this.http.get<Empresas[]>(this.url).pipe(
+  get(params: HttpParams): Observable<Empresas[]> {
+    return this.http.get<Empresas[]>(this.url, { params: params }).pipe(
       first()
     );
   }

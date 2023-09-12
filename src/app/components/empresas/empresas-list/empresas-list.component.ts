@@ -3,6 +3,8 @@ import { Empresas } from 'src/app/shared/interfaces/empresas';
 import { EmpresasService } from 'src/app/shared/services/empresas.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { HttpParams } from '@angular/common/http';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -13,9 +15,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmpresasListComponent implements OnInit {
 
-  @Input() id: number = 0;
-
   listEmpresas: Empresas[] = [];
+
+  filtros = new FormGroup({
+    nombre: new FormControl<string | null>(''),
+    direccion: new FormControl<string | null>(''),
+    telefono: new FormControl<string | null>(''),
+    activo: new FormControl<boolean | null>(true),
+  });
 
   constructor(
     private empresasSvc: EmpresasService,
@@ -31,20 +38,34 @@ export class EmpresasListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.empresasSvc.get().subscribe({
-      next: res => this.listEmpresas = res,
-      error: err => console.log('Error al obtener datos')
-    });
+    this.cargar();
   }
 
   cargar() : void{
-    this.empresasSvc.get().subscribe({
+    let params = new HttpParams();
+    
+    for (const key in this.filtros.controls) {
+
+      let values = this.filtros.get(key)!.value 
+      
+      if (values != null) {
+        values = String(this.filtros.get(key)!.value)
+      }
+
+      console.log(values);
+      
+      if (values) {        
+        params = params.append(key, this.filtros.get(key)!.value)  
+      }
+    }
+
+    this.empresasSvc.get(params).subscribe({
       next: res => this.listEmpresas = res,
       error: err => console.log('Error al obtener datos')
     });
   }
 
-  delete( id: number) : void{
+  delete(id: number) : void{
     this.empresasSvc.delete(id).subscribe({
       next: res => {this.cargar()},
       error: err => {

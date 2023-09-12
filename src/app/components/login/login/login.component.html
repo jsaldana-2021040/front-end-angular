@@ -1,28 +1,27 @@
 
 <div class="block sm:flex sm:justify-center p-5">
   
-  <div class="pt-28 text-center md:mr-16">
-    <i class="fa-regular fa-circle-user text-9xl mb-5"></i>
-    <h1>Login</h1>
-  </div>
-  
-  <form class="space-y-4 w-full sm:max-w-sm pt-20 md:pl-10" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
-    <div>
-      <label for="email" class="form-label">Email</label>
-      <input formControlName="email" id="email" name="email" type="email">
-      <app-form-errors [control]="usuario.controls.email"/>
+  <form class="space-y-4 w-full sm:max-w-sm pt-9 md:pl-10" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+    <div class="text-center">
+      <i class="fa-solid fa-circle-user text-8xl mb-5"></i>
+      <h1 class="mb-8">Login</h1>
     </div>
-
-    <div>
-      <label for="password" class="form-label">Password</label>
-      <input formControlName="password" id="password" name="password" type="password">
-      <app-form-errors [control]="usuario.controls.password"/>
+    <div class="bg-slate-800 bg-opacity-80 dark:bg-slate-700 p-5 rounded-xl space-y-6 mb-8">
+      <div>
+        <label for="email" class="form-label mb-2 dark:text-white">Email</label>
+        <input formControlName="email" id="email" name="email" type="email" class="mb-2">
+        <app-form-errors [control]="usuario.controls.email"/>
+      </div>
+      <div>
+        <label for="password" class="form-label mb-2 dark:text-white">Password</label>
+        <input formControlName="password" id="password" name="password" type="password">
+        <app-form-errors [control]="usuario.controls.password"/>
+      </div>
+      <div class="flex grid-cols-2 gap-x-2 mt-8">
+        <button type="submit" class="btn-p enabled:hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
+          <i class="fa-solid fa-check"></i> Aceptar
+        </button>
     </div>
-
-    <div class="flex grid-cols-2 gap-x-2">
-      <button type="submit" class="btn-p enabled:hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
-        <i class="fa-solid fa-check"></i> Aceptar
-      </button>
     </div>
   </form>
 </div>

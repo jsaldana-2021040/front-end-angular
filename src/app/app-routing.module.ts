@@ -14,21 +14,24 @@ import { EmpresasEditComponent } from './components/empresas/empresas-edit/empre
 import { PersonasEditComponent } from './components/personas/personas-edit/personas-edit.component';
 import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuarios-edit.component';
 import { LoginComponent } from './components/login/login/login.component';
+import { personasGuard } from './shared/guards/personas-guard.guard';
+import { empresasGuard } from './shared/guards/empresas-guard.guard';
+import { usuariosGuard } from './shared/guards/usuarios-guard.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'formulario-base', component: FormularioBaseComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'empresas', component: EmpresasListComponent },
-  { path: 'empresas/agregar', component: EmpresasCreateComponent },
-  { path: 'empresas/editar/:id', component: EmpresasEditComponent },
-  { path: 'personas', component: PersonasListComponent },
-  { path: 'personas/agregar', component: PersonasCreateComponent },
-  { path: 'personas/editar/:id', component: PersonasEditComponent },
-  { path: 'usuarios', component: UsuariosListComponent },
-  { path: 'usuarios/agregar', component: UsuariosCreateComponent },
-  { path: 'usuarios/editar/:id', component: UsuariosEditComponent },
+  { path: 'empresas', component: EmpresasListComponent, canActivate:[empresasGuard]},
+  { path: 'empresas/agregar', component: EmpresasCreateComponent, canActivate:[empresasGuard],},
+  { path: 'empresas/editar/:id', component: EmpresasEditComponent, canActivate:[empresasGuard]},
+  { path: 'personas', component: PersonasListComponent, canActivate:[personasGuard],},
+  { path: 'personas/agregar', component: PersonasCreateComponent , canActivate:[personasGuard]},
+  { path: 'personas/editar/:id', component: PersonasEditComponent , canActivate:[personasGuard]},
+  { path: 'usuarios', component: UsuariosListComponent, canActivate:[usuariosGuard]},
+  { path: 'usuarios/agregar', component: UsuariosCreateComponent, canActivate:[usuariosGuard]},
+  { path: 'usuarios/editar/:id', component: UsuariosEditComponent, canActivate:[usuariosGuard]},
   { path: '**', component: NotFoundComponent },
 ];
 

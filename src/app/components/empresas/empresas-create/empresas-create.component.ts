@@ -18,7 +18,8 @@ export class EmpresasCreateComponent {
   empresa = new FormGroup({
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     direccion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
-    telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(8)] })
+    telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)] }),
+    codigoPais: new FormControl<string>('', { nonNullable: true, validators: Validators.required })
   });
 
   constructor(
@@ -35,21 +36,29 @@ export class EmpresasCreateComponent {
   }
 
   onSubmit(): void {
-
+    
     if (this.empresa.invalid) {
-      console.log('no se ingresaron todos los datos necesarios');
+      this.empresa.markAllAsTouched();
       this.enviandoDatos = false;
       return;
     }
 
+    let body = this.empresa.value;
+    body.telefono = body.codigoPais! + ' ' +  body.telefono!;
+    
+
     this.enviandoDatos = true;
-    this.empresasSvc.post(this.empresa.value).subscribe({
+    this.empresasSvc.post(body).subscribe({
       next: res => this.router.navigate(['..'], { relativeTo: this.route }),
       error: err => {
-        console.log('Error al insertar datos');
         this.enviandoDatos = false;
       },
       complete: () => this.showSuccess()
-    })
+    });
+  }
+
+  trimFormValue(control: string): void {
+    let val = String(this.empresa.get(control)?.value);
+    this.empresa.get(control)?.setValue(val.trim());
   }
 }

@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PersonasService } from 'src/app/shared/services/personas.service';
 import { EmpresasService } from 'src/app/shared/services/empresas.service';
 import { Empresas } from 'src/app/shared/interfaces/empresas';
-import { Subscription} from 'rxjs';
+import { Subscription, filter, map} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToastrService } from 'ngx-toastr';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-personas-create',
@@ -45,7 +46,9 @@ export class PersonasCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.empresasSvc.get().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    let params = new HttpParams().append('activo', true);
+    // this.empresasSvc.get().pipe(takeUntilDestroyed(this.destroyRef), map(l => l.filter(e => e.activo))).subscribe({
+    this.empresasSvc.get(params).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: res => this.listEmpresas = res,
       error: err => console.log('Error al obtener datos')
     });
@@ -54,6 +57,7 @@ export class PersonasCreateComponent implements OnInit {
   onSubmit(): void {
     if (this.persona.invalid) {
       console.log('no se ingresaron todos los datos necesarios');
+      this.persona.markAllAsTouched();
       this.enviandoDatos = false;
       return;
     }
@@ -68,5 +72,10 @@ export class PersonasCreateComponent implements OnInit {
       }
     });
     this.showSuccess()
+  }
+
+  trimFormValue(control: string): void {
+    let val = String(this.persona.get(control)?.value);
+    this.persona.get(control)?.setValue(val.trim());
   }
 }

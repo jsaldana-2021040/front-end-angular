@@ -2,26 +2,29 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-  <form class="space-y-6" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
-    <div>
-      <label for="email" class="form-label">Email</label>
-      <input formControlName="email" id="email" name="email" type="email">
-      <app-form-errors [control]="usuario.controls.email"/>
-    </div>
+    <form class="space-y-6" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
 
-    <div>
-      <label for="password" class="form-label">Password</label>
-      <input formControlName="password" id="password" name="password" type="password">
-      <app-form-errors [control]="usuario.controls.password"/>
-    </div>
+      <div class="bg-slate-100 shadow-2xl border border-slate-300 dark:border-slate-900 dark:bg-slate-700 px-6 pt-3 pb-6 rounded-xl space-y-6 mb-8">
+        <div>
+          <label for="email" class="form-label">Email<span *ngIf="usuario.controls.email.invalid" class="text-red-600 text-xl">*</span></label>
+          <input formControlName="email" id="email" name="email" type="email" (focusout)="trimFormValue('nombre')">
+          <app-form-errors [control]="usuario.controls.email"/>
+        </div>
 
-    <div class="flex grid-cols-2 gap-x-2">
-      <button type="submit" class="btn-p hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
-        <i class="fas fa-save"></i> Guardar
-      </button>
-      <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="..">
-        <i class="fas fa-times"></i> Cancelar
-      </button>
-    </div>
-  </form>
-</div>
+        <div>
+          <label for="password" class="form-label">Password<span *ngIf="usuario.controls.password.invalid" class="text-red-600 text-xl">*</span></label>
+          <input formControlName="password" id="password" name="password" type="password" (focusout)="trimFormValue('nombre')">
+          <app-form-errors [control]="usuario.controls.password"/>
+        </div>
+      </div>
+
+      <div class="flex grid-cols-2 gap-x-2">
+        <button type="submit" class="btn-p hover:-translate-y-1 transition-all">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+        <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="..">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
+    </form>
+  </div>

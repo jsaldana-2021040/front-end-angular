@@ -7,6 +7,7 @@ import { Empresas } from 'src/app/shared/interfaces/empresas';
 import { EmpresasService } from 'src/app/shared/services/empresas.service';
 import { PersonasService } from 'src/app/shared/services/personas.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-personas-edit',
@@ -46,7 +47,8 @@ export class PersonasEditComponent {
   }
 
   ngOnInit(): void {
-    this.empresasSvc.get().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    let params = new HttpParams()
+    this.empresasSvc.get(params).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: res => this.listEmpresas = res,
       error: err => console.log('Error al obtener datos')
     });

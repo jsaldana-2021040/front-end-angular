@@ -30,7 +30,7 @@
       <div class="flex ml-4 gap-x-2">
         <a *ngIf="!isLoged()" class="btn btn-w" routerLink="login">Register</a>
         <a *ngIf="!isLoged()" class="btn btn-w" routerLink="login">Login</a>
-        <button *ngIf="isLoged()" class="btn-w" (click)="logOut()">Log out</button>
+        <button *ngIf="isLoged()" class="btn-w" routerLink="login" (click)="logOut()">Log out</button>
       </div>
     </div>
   </div>

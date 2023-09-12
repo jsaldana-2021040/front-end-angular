@@ -41,6 +41,7 @@ export class UsuariosCreateComponent implements OnInit {
   onSubmit(): void {
     if (this.usuario.invalid) {
       console.log('no se ingresaron todos los datos necesarios');
+      this.usuario.markAllAsTouched();
       this.enviandoDatos = false;
       return;
     }
@@ -54,5 +55,10 @@ export class UsuariosCreateComponent implements OnInit {
         this.enviandoDatos = false;
       }
     });
+  }
+
+  trimFormValue(control: string): void {
+    let val = String(this.usuario.get(control)?.value);
+    this.usuario.get(control)?.setValue(val.trim());
   }
 }

@@ -3,26 +3,30 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-  <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
-    <div>
-      <label for="email" class="form-label">Email</label>
-      <input formControlName="email" id="email" name="email" type="email">
-      <app-form-errors [control]="usuario.controls.email"/>
-    </div>
+    <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+      
+      <div class="bg-slate-100 shadow-2xl border border-slate-300 dark:border-slate-900 dark:bg-slate-700 px-6 pt-3 pb-6 rounded-xl space-y-6 mb-8">
+        <div>
+          <label for="email" class="form-label">Email</label>
+          <input formControlName="email" id="email" name="email" type="email">
+          <app-form-errors [control]="usuario.controls.email" />
+        </div>
 
-    <div>
-      <label for="password" class="form-label">Password</label>
-      <input formControlName="password" id="password" name="password" type="password">
-      <app-form-errors [control]="usuario.controls.password"/>
-    </div>
+        <div>
+          <label for="password" class="form-label">Password</label>
+          <input formControlName="password" id="password" name="password" type="password">
+          <app-form-errors [control]="usuario.controls.password" />
+        </div>
+      </div>
 
-    <div class="flex grid-cols-2 gap-x-2">
-      <button type="submit" class="btn-p hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
-        <i class="fa-solid fa-arrows-rotate"></i> Actualizar
-      </button>
-      <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="../..">
-        <i class="fas fa-times"></i> Cancelar
-      </button>
-    </div>
-  </form>
-</div>
+      <div class="flex grid-cols-2 gap-x-2">
+        <button type="submit" class="btn-p hover:-translate-y-1 transition-all"
+          [disabled]="enviandoDatos || usuario.invalid">
+          <i class="fa-solid fa-arrows-rotate"></i> Actualizar
+        </button>
+        <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="../..">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
+    </form>
+  </div>

@@ -1,27 +1,27 @@
-<div *ngIf="control.invalid">
+<div *ngIf="control.invalid && control.touched">
   <ul class="fa-ul relative -left-4">
 
-    <li *ngIf="control.errors!['required']" class="form-error-msg">
+    <li *ngIf="control.errors!['required']" class="form-error-msg mb-2">
       <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
       Campo obligatorio
     </li>
 
-    <li *ngIf="control.errors!['minlength']" class="form-error-msg">
+    <li *ngIf="control.errors!['minlength']" class="form-error-msg mb-2">
       <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
       No menos de {{control.errors!['minlength'].requiredLength}} caracteres
     </li>
 
-    <li *ngIf="control.errors!['maxlength']" class="form-error-msg">
+    <li *ngIf="control.errors!['maxlength']" class="form-error-msg mb-2">
       <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
       No más de {{control.errors!['maxlength'].requiredLength}}
     </li>
 
-    <li *ngIf="control.errors!['email']" class="form-error-msg">
+    <li *ngIf="control.errors!['email']" class="form-error-msg mb-2">
       <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
       No es un correo válido
     </li>
 
-    <li *ngIf="control.errors!['pattern']" class="form-error-msg">
+    <li *ngIf="control.errors!['pattern']" class="form-error-msg mb-2">
       <span class="fa-li"><i class="fa-solid fa-fw fa-triangle-exclamation"></i></span>
       Formato incorrecto
     </li>
