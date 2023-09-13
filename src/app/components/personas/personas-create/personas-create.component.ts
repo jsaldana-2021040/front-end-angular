@@ -29,7 +29,7 @@ export class PersonasCreateComponent implements OnInit {
     apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     tieneVisa: new FormControl<boolean>(false, { nonNullable: true }),
     empresaCod: new FormControl<number | null>(null, { nonNullable: true, validators: Validators.required }),
-    direcciones: new FormArray<FormGroup>([])
+    direcciones: new FormArray<FormGroup<{ direccion: FormControl, zona: FormControl}>>([])
   });
 
   constructor(
@@ -61,21 +61,17 @@ export class PersonasCreateComponent implements OnInit {
       this.persona.markAllAsTouched();
       this.enviandoDatos = false;
       return;
-    }
+    }    
 
-    console.log(this.persona);
-    
-
-    // this.enviandoDatos = true;
-
-    // this.suscripcion = this.personasSvc.post(this.persona.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-    //   next: res => this.router.navigate(['..'], { relativeTo: this.route }),
-    //   error: err => {
-    //     console.log('Error al insertar datos');
-    //     this.enviandoDatos = false;
-    //   }
-    // });
-    // this.showSuccess()
+    this.enviandoDatos = true;
+    this.suscripcion = this.personasSvc.post(this.persona.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: res => this.router.navigate(['..'], { relativeTo: this.route }),
+      error: err => {
+        console.log('Error al insertar datos');
+        this.enviandoDatos = false;
+      }
+    });
+    this.showSuccess()
   }
 
   trimFormValue(control: string): void {
@@ -83,10 +79,15 @@ export class PersonasCreateComponent implements OnInit {
     this.persona.get(control)?.setValue(val.trim());
   }
 
-  addDireccion(): void {
+  agregarDireccion(): void {
     this.persona.controls.direcciones.push(new FormGroup({
-      direccion: new FormControl<string>(''),
-      zona: new FormControl<string>('')
-    }))
+      direccion: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)]}),
+      zona: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)]}),
+    }));
   }
+
+  eliminarDireccion(index: number): void {
+    this.persona.controls.direcciones.removeAt(index);
+  }
+  
 }

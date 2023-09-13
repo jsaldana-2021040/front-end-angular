@@ -7,13 +7,14 @@
       <div>
         <label for="nombres" class="form-label">Nombres<span class="text-red-600 text-xl">*</span></label>
         <input formControlName="nombres" id="nombres" name="nombres" type="text" (focusout)="trimFormValue('nombre')">
-        <app-form-errors [control]="persona.controls.nombres"/>
+        <app-form-errors [control]="persona.controls.nombres" />
       </div>
 
       <div>
         <label for="apellidos" class="form-label">Apellidos<span class="text-red-600 text-xl">*</span></label>
-        <input formControlName="apellidos" id="apellidos" name="apellidos" type="text" (focusout)="trimFormValue('nombre')">
-        <app-form-errors [control]="persona.controls.apellidos"/>
+        <input formControlName="apellidos" id="apellidos" name="apellidos" type="text"
+          (focusout)="trimFormValue('nombre')">
+        <app-form-errors [control]="persona.controls.apellidos" />
       </div>
 
       <div>
@@ -21,7 +22,7 @@
         <select name="empresas" id="empresas" formControlName="empresaCod">
           <option *ngFor="let item of listEmpresas" [ngValue]="item.codEmpresa">{{item.nombre}}</option>
         </select>
-        <app-form-errors [control]="persona.controls.empresaCod"/>
+        <app-form-errors [control]="persona.controls.empresaCod" />
       </div>
 
       <div>
@@ -30,30 +31,42 @@
       </div>
 
       <div>
-        <div class="flex items-center">
-          <h5 class="inline-block grow">Direcciones</h5>
-          <button type="button" class="btn-p w-min px-1 py-0" (click)="addDireccion()">
+        <div class="flex items-center mb-1">
+          <button type="button" class="btn-p w-min px-1 py-0 mr-1" (click)="agregarDireccion()">
             <i class="fas fa-plus"></i>
           </button>
-          
+          <h5 class="inline-block grow">Direcciones</h5>
         </div>
         <hr class="border-gray-400 border-2 mb-5">
 
         <div class="space-y-4" formArrayName="direcciones">
-          <div *ngFor="let direccion of persona.controls.direcciones.controls; let i=index">
-            <label for="grupo-{{i}}" class="mb-1">Direccion {{i+1}}</label>
-            <div class="flex flex-row space-x-2" id="grupo-{{i}}">
-              <div class="w-3/4">
-                <label for="direccion-{{i}}" class="form-label text-sm leading-none">Direccion<span class="text-red-600 text-xl">*</span></label>
-                <input class="form-sm" formControlName="direccion" id="direccion-{{i}}" name="direccion-{{i}}" type="text" >
+          <ng-container *ngFor="let direccion of persona.controls.direcciones.controls; index as i; first as isFirst">
+            <hr class="border-gray-300 border-1" *ngIf="!isFirst">
+            <div [formGroupName]="i">
+              <div class="flex items-center">
+                <label class="inline-block grow" for="grupo-{{i}}">Direccion {{i+1}}</label>
+                <button type="button" class="btn-d w-min px-1 py-0" (click)="eliminarDireccion(i)">
+                  <i class="fas fa-times"></i>
+                </button>
               </div>
-              <div>
-                <label for="zona-{{i}}" class="form-label text-sm leading-none">Zona<span class="text-red-600 text-xl">*</span></label>
-                <input class="form-sm" formControlName="zona" id="zona-{{i}}" name="zona-{{i}}" type="text" >
-              </div>
+              <div class="flex flex-row space-x-2" id="grupo-{{i}}">
+                <div class="w-3/4">
+                  <label for="direccion-{{i}}" class="form-label mb-0 text-sm leading-none">Direccion<span
+                      class="text-red-600 text-xl">*</span></label>
+                  <input class="form-sm" formControlName="direccion" id="direccion-{{i}}" name="direccion-{{i}}"
+                    type="text">
+                  <app-form-errors [control]="direccion.controls.direccion" />
+                </div>
+                <div>
+                  <label for="zona-{{i}}" class="form-label mb-0 text-sm leading-none">Zona<span
+                      class="text-red-600 text-xl">*</span></label>
+                  <input class="form-sm" formControlName="zona" id="zona-{{i}}" name="zona-{{i}}" type="text">
+                  <app-form-errors [control]="direccion.controls.zona" />
+                </div>
 
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
 
       </div>
