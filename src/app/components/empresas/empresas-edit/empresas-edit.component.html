@@ -18,15 +18,21 @@
         </div>
 
         <div>
-          <label for="telefono" class="form-label">Telefono</label>
-          <input formControlName="telefono" id="telefono" name="telefono" type="text">
+          <label for="telefono" class="form-label">Telefono<span class="text-red-600 text-xl">*</span></label>
+          <div class="inline-flex">
+            <select formControlName="codigoPais" class="w-24 mr-3">
+              <option>+502</option>
+              <option>+52</option>
+            </select>
+            <input formControlName="telefono" id="telefono" name="telefono" type="text">
+          </div>
           <app-form-errors [control]="empresa.controls.telefono" />
         </div>
       </div>
 
       <div class="flex grid-cols-2 gap-x-2">
         <button type="submit" class="btn-p hover:-translate-y-1 transition-all"
-          [disabled]="enviandoDatos || empresa.invalid"><i class="fa-solid fa-arrows-rotate"></i> Actualizar</button>
+          [disabled]="enviandoDatos"><i class="fa-solid fa-arrows-rotate"></i> Actualizar</button>
         <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="../..">
           <i class="fas fa-times"></i> Cancelar
         </button>

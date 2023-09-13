@@ -19,7 +19,8 @@ export class EmpresasEditComponent implements OnInit {
   empresa = new FormGroup({
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     direccion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
-    telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(8)] })
+    telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]}),
+    codigoPais: new FormControl<string>('', { nonNullable: true, validators: Validators.required })
   });
 
   constructor(
@@ -37,9 +38,15 @@ export class EmpresasEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.empresasSvc.getId(this.id).subscribe({
-      next: res => this.empresa.patchValue(res),
-      error: err => {
-        console.log('Error al obtener la empresa');
+      next: res => {
+        let partesTelefono = res.telefono.split(' ');
+        this.empresa.patchValue({
+          nombre: res.nombre,
+          direccion: res.direccion,
+          telefono: partesTelefono[1],
+          codigoPais: partesTelefono[0]
+        });
+      }, error: err => {
         this.enviandoDatos = false;
       }
     })
@@ -47,15 +54,17 @@ export class EmpresasEditComponent implements OnInit {
 
 
   onSubmit(): void {
+    let body = this.empresa.value;
+    body.telefono = body.codigoPais! + ' ' +  body.telefono!;
 
     if (this.empresa.invalid) {
-      console.log('no se ingresaron todos los datos necesarios');
       this.enviandoDatos = false;
       return;
     }
 
+
     this.enviandoDatos = true;
-    this.empresasSvc.put(this.empresa.value, this.id).subscribe({
+    this.empresasSvc.put(body, this.id).subscribe({
       next: res => this.router.navigate(['../..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');

@@ -1,12 +1,12 @@
 <page-header icono="users" nombrePagina="Usuarios" />
 
-<form [formGroup]="filtros" (submit)="cargar(1)">
+<form [formGroup]="filtros" (submit)="cargar(1)" autocomplete="off">
   <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5">
-    <div class="w-full">
+    <div class="w-full md:w-72">
       <label for="email" class="form-label">Email</label>
       <input formControlName="email" id="email" name="email" type="text">
     </div>
-    <div class="w-full">
+    <div class="w-full md:w-72">
       <label for="activo" class="form-label">Activo</label>
       <select formControlName="activo" name="activo" id="activo">
         <option [ngValue]="null">Todos</option>
