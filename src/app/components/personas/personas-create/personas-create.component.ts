@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PersonasService } from 'src/app/shared/services/personas.service';
 import { EmpresasService } from 'src/app/shared/services/empresas.service';
@@ -28,7 +28,8 @@ export class PersonasCreateComponent implements OnInit {
     nombres: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(100), Validators.minLength(3)] }),
     apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     tieneVisa: new FormControl<boolean>(false, { nonNullable: true }),
-    empresaCod: new FormControl<number | null>(null, { nonNullable: true, validators: Validators.required })
+    empresaCod: new FormControl<number | null>(null, { nonNullable: true, validators: Validators.required }),
+    direcciones: new FormArray<FormGroup>([])
   });
 
   constructor(
@@ -62,20 +63,30 @@ export class PersonasCreateComponent implements OnInit {
       return;
     }
 
-    this.enviandoDatos = true;
+    console.log(this.persona);
+    
 
-    this.suscripcion = this.personasSvc.post(this.persona.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: res => this.router.navigate(['..'], { relativeTo: this.route }),
-      error: err => {
-        console.log('Error al insertar datos');
-        this.enviandoDatos = false;
-      }
-    });
-    this.showSuccess()
+    // this.enviandoDatos = true;
+
+    // this.suscripcion = this.personasSvc.post(this.persona.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    //   next: res => this.router.navigate(['..'], { relativeTo: this.route }),
+    //   error: err => {
+    //     console.log('Error al insertar datos');
+    //     this.enviandoDatos = false;
+    //   }
+    // });
+    // this.showSuccess()
   }
 
   trimFormValue(control: string): void {
     let val = String(this.persona.get(control)?.value);
     this.persona.get(control)?.setValue(val.trim());
+  }
+
+  addDireccion(): void {
+    this.persona.controls.direcciones.push(new FormGroup({
+      direccion: new FormControl<string>(''),
+      zona: new FormControl<string>('')
+    }))
   }
 }

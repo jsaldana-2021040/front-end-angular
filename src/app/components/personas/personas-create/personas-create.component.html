@@ -1,34 +1,61 @@
 <page-header icono="user" nombrePagina="Personas: Agregar" [mostrarBtnAgregar]="false" />
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" [formGroup]="persona" (submit)="onSubmit()" autocomplete="off">
+  <div class="card sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-5" [formGroup]="persona" (submit)="onSubmit()" autocomplete="off">
 
-      <div class="bg-slate-100 shadow-2xl border border-slate-300 dark:border-slate-900 dark:bg-slate-700 px-6 pt-3 pb-6 rounded-xl space-y-6 mb-8">
-        <div>
-          <label for="nombres" class="form-label">Nombres<span class="text-red-600 text-xl">*</span></label>
-          <input formControlName="nombres" id="nombres" name="nombres" type="text" (focusout)="trimFormValue('nombre')">
-          <app-form-errors [control]="persona.controls.nombres"/>
+      <div>
+        <label for="nombres" class="form-label">Nombres<span class="text-red-600 text-xl">*</span></label>
+        <input formControlName="nombres" id="nombres" name="nombres" type="text" (focusout)="trimFormValue('nombre')">
+        <app-form-errors [control]="persona.controls.nombres"/>
+      </div>
+
+      <div>
+        <label for="apellidos" class="form-label">Apellidos<span class="text-red-600 text-xl">*</span></label>
+        <input formControlName="apellidos" id="apellidos" name="apellidos" type="text" (focusout)="trimFormValue('nombre')">
+        <app-form-errors [control]="persona.controls.apellidos"/>
+      </div>
+
+      <div>
+        <label for="empresas" class="form-label">Empresas<span class="text-red-600 text-xl">*</span></label>
+        <select name="empresas" id="empresas" formControlName="empresaCod">
+          <option *ngFor="let item of listEmpresas" [ngValue]="item.codEmpresa">{{item.nombre}}</option>
+        </select>
+        <app-form-errors [control]="persona.controls.empresaCod"/>
+      </div>
+
+      <div>
+        <label for="tieneVisa" class="form-label">Visa</label>
+        <input formControlName="tieneVisa" id="tieneVisa" name="tieneVisa" type="checkbox">
+      </div>
+
+      <div>
+        <div class="flex items-center">
+          <h5 class="inline-block grow">Direcciones</h5>
+          <button type="button" class="btn-p w-min px-1 py-0" (click)="addDireccion()">
+            <i class="fas fa-plus"></i>
+          </button>
+          
+        </div>
+        <hr class="border-gray-400 border-2 mb-5">
+
+        <div class="space-y-4" formArrayName="direcciones">
+          <div *ngFor="let direccion of persona.controls.direcciones.controls; let i=index">
+            <label for="grupo-{{i}}" class="mb-1">Direccion {{i+1}}</label>
+            <div class="flex flex-row space-x-2" id="grupo-{{i}}">
+              <div class="w-3/4">
+                <label for="direccion-{{i}}" class="form-label text-sm leading-none">Direccion<span class="text-red-600 text-xl">*</span></label>
+                <input class="form-sm" formControlName="direccion" id="direccion-{{i}}" name="direccion-{{i}}" type="text" >
+              </div>
+              <div>
+                <label for="zona-{{i}}" class="form-label text-sm leading-none">Zona<span class="text-red-600 text-xl">*</span></label>
+                <input class="form-sm" formControlName="zona" id="zona-{{i}}" name="zona-{{i}}" type="text" >
+              </div>
+
+            </div>
+          </div>
         </div>
 
-        <div>
-          <label for="apellidos" class="form-label">Apellidos<span class="text-red-600 text-xl">*</span></label>
-          <input formControlName="apellidos" id="apellidos" name="apellidos" type="text" (focusout)="trimFormValue('nombre')">
-          <app-form-errors [control]="persona.controls.apellidos"/>
-        </div>
-
-        <div>
-          <label for="empresas" class="form-label">Empresas<span class="text-red-600 text-xl">*</span></label>
-          <select name="empresas" id="empresas" formControlName="empresaCod">
-            <option *ngFor="let item of listEmpresas" [ngValue]="item.codEmpresa">{{item.nombre}}</option>
-          </select>
-          <app-form-errors [control]="persona.controls.empresaCod"/>
-        </div>
-
-        <div>
-          <label for="tieneVisa" class="form-label">Visa</label>
-          <input formControlName="tieneVisa" id="tieneVisa" name="tieneVisa" type="checkbox">
-        </div>
       </div>
 
       <div class="flex grid-cols-2 gap-x-2">
