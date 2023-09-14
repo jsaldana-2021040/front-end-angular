@@ -4,7 +4,7 @@
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form [formGroup]="empresa" (submit)="onSubmit()" autocomplete="off">
       
-      <div class="bg-slate-100 shadow-2xl border border-slate-300 dark:border-slate-900 dark:bg-slate-700 px-6 pt-3 pb-6 rounded-xl space-y-6 mb-8">
+      <div class="card">
         <div>
           <label for="nombre" class="form-label">Nombre<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="nombre" id="nombre" name="nombre" type="text" (focusout)="trimFormValue('nombre')">
@@ -19,7 +19,7 @@
 
         <div>
           <label for="telefono" class="form-label">Telefono<span class="text-red-600 text-xl">*</span></label>
-          <div class="inline-flex">
+          <div class="flex">
             <select formControlName="codigoPais" class="w-24 mr-3">
               <option>+502</option>
             </select>

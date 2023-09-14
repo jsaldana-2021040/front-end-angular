@@ -22,6 +22,7 @@ export class PersonasListComponent implements OnInit {
     apellidos: new FormControl<string | null>(''),
     tieneVisa: new FormControl<boolean | null>(null),
     activo: new FormControl<boolean | null>(true),
+    porPagina: new FormControl<number>(10, {nonNullable: true}),
   });
 
   constructor(
@@ -36,15 +37,19 @@ export class PersonasListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargar(1);
+    this.cargar(1, 10);
 
-    this.filtros.controls.activo.valueChanges.subscribe(() => this.cargar(1));
-    this.filtros.controls.tieneVisa.valueChanges.subscribe(() => this.cargar(1));
+    this.filtros.controls.activo.valueChanges.subscribe(() => this.cargar(1, this.filtros.controls.porPagina.value));
+    this.filtros.controls.tieneVisa.valueChanges.subscribe(() => this.cargar(1, this.filtros.controls.porPagina.value));
   }
 
-  cargar(pagina: number) : void{
+  cargar(pagina: number, porPagina : number) : void{
 
-    let params = new HttpParams().append('pagina', pagina).append('porPagina', 2);
+    let params = new HttpParams().append('pagina', pagina).append('porPagina', porPagina);
+
+    if (this.filtros.controls.porPagina.value! == null || this.filtros.controls.porPagina.value! == 0) {
+      this.filtros.controls.porPagina.setValue(10)
+    }
 
     for (const key in this.filtros.controls) {
       if (this.filtros.get(key)!.value !== null && this.filtros.get(key)!.value !== '') {
@@ -60,7 +65,7 @@ export class PersonasListComponent implements OnInit {
 
   delete( id: number) : void{
     this.personasSvc.delete(id).subscribe({
-      next: res => {this.cargar(1)},
+      next: res => {this.cargar(1, this.filtros.controls.porPagina.value)},
       error: err => {
         console.log('Error al insertar datos');
       }

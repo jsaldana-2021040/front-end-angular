@@ -42,7 +42,7 @@
         <div class="space-y-4" formArrayName="direcciones">
           <ng-container *ngFor="let direccion of persona.controls.direcciones.controls; index as i; first as isFirst">
             <hr class="border-gray-300 border-1" *ngIf="!isFirst">
-            <div [formGroupName]="i">
+            <div [formGroupName]="i" class="card shadow-md bg-slate-200 dark:bg-slate-600">
               <div class="flex items-center">
                 <label class="inline-block grow" for="grupo-{{i}}">Direccion {{i+1}}</label>
                 <button type="button" class="btn-d w-min px-1 py-0" (click)="eliminarDireccion(i)">

@@ -24,6 +24,7 @@ export class EmpresasListComponent implements OnInit {
     direccion: new FormControl<string | null>(''),
     telefono: new FormControl<string | null>(''),
     activo: new FormControl<boolean | null>(true),
+    porPagina: new FormControl<number>(10, {nonNullable: true}),
   });
 
   constructor(
@@ -40,13 +41,17 @@ export class EmpresasListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargar(1);
+    this.cargar(1, 10);
 
-    this.filtros.controls.activo.valueChanges.subscribe(() => this.cargar(1));
+    this.filtros.controls.activo.valueChanges.subscribe(() => this.cargar(1, 10));
   }
 
-  cargar(pagina: number): void {
-    let params = new HttpParams().append('pagina', pagina).append('porPagina', 2);
+  cargar(pagina: number, porPagina : number): void {
+    let params = new HttpParams().append('pagina', pagina).append('porPagina', porPagina);
+
+    if (this.filtros.controls.porPagina.value == null || this.filtros.controls.porPagina.value == 0 || this.filtros.controls.porPagina.value <= 0) {
+      this.filtros.controls.porPagina.setValue(10)
+    }
 
     for (const key in this.filtros.controls) {
       if (this.filtros.get(key)!.value !== null && this.filtros.get(key)!.value !== '') {
@@ -62,9 +67,9 @@ export class EmpresasListComponent implements OnInit {
 
   delete(id: number): void {
     this.empresasSvc.delete(id).subscribe({
-      next: res => { this.cargar(1); },
+      next: res => { this.cargar(1, this.filtros.controls.porPagina.value); },
       error: err => {
-        console.log('Error al insertar datos');
+        console.log('Error al eliminar datos');
       }
     });
     this.showSuccess()

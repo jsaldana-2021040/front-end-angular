@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Usuarios } from 'src/app/shared/interfaces/usuarios';
 import { UsuariosService } from 'src/app/shared/services/usuarios.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuarios-create',
@@ -28,8 +29,21 @@ export class UsuariosCreateComponent {
   constructor(
     private usuariosSvc: UsuariosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
   ) { }
+
+  showSuccess() {
+    this.toastr.success('agregado con exito', '', {
+      positionClass:"toast-bottom-right"
+    });
+  }
+
+  showError() {
+    this.toastr.error('Error al insertar el usuario', '', {
+      positionClass:"toast-bottom-right"
+    });
+  }
 
   onSubmit(): void {
     if (this.usuario.invalid) {
@@ -45,8 +59,10 @@ export class UsuariosCreateComponent {
       next: res => this.router.navigate(['..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');
+        this.showError()
         this.enviandoDatos = false;
-      }
+      },
+      complete: () => this.showSuccess()
     });
   }
 

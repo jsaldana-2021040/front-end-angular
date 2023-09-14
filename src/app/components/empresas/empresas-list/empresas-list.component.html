@@ -1,6 +1,6 @@
 <page-header icono="city" nombrePagina="Empresas" />
 
-<form [formGroup]="filtros" (submit)="cargar(1)" autocomplete="off">
+<form [formGroup]="filtros" (submit)="cargar(1, filtros.controls.porPagina.value!)" autocomplete="off">
   <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5">
     <div class="w-full">
       <label for="nombre" class="form-label">Nombre</label>
@@ -21,6 +21,11 @@
         <option [ngValue]="true">Si</option>
         <option [ngValue]="false">No</option>
       </select>
+    </div>
+
+    <div class="w-full">
+      <label for="porPagina" class="form-label">por pagina</label>
+      <input class=" remove-arrow" formControlName="porPagina" id="porPagina" type="number">
     </div>
 
     <div>
@@ -61,4 +66,4 @@
   </table>
 </div>
 
-<app-paginador [CantPaginas]="pgEmpresas.pages" [pagActual]="pgEmpresas.page" (cambioPagina)="cargar($event)"></app-paginador>
+<app-paginador [CantPaginas]="pgEmpresas.pages" [pagActual]="pgEmpresas.page" (cambioPagina)="cargar($event , filtros.controls.porPagina.value!)"></app-paginador>

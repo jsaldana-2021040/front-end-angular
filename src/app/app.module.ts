@@ -31,6 +31,7 @@ import { UsuariosEditComponent } from './components/usuarios/usuarios-edit/usuar
 import { LoginComponent } from './components/login/login/login.component';
 import { TokenInterceptorInterceptor } from './shared/utils/token-interceptor.interceptor';
 import { PaginadorComponent } from './shared/components/paginador/paginador.component';
+import { TableContainerComponent } from './shared/components/table-container/table-container.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { PaginadorComponent } from './shared/components/paginador/paginador.comp
     UsuariosEditComponent,
     LoginComponent,
     PaginadorComponent,
+    TableContainerComponent,
   ],
   imports: [
     BrowserModule,

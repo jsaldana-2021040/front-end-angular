@@ -1,6 +1,6 @@
 <page-header icono="users" nombrePagina="Usuarios" />
 
-<form [formGroup]="filtros" (submit)="cargar(1)" autocomplete="off">
+<form [formGroup]="filtros" (submit)="cargar(1, filtros.controls.porPagina.value!)" autocomplete="off">
   <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5">
     <div class="w-full md:w-72">
       <label for="email" class="form-label">Email</label>
@@ -13,6 +13,11 @@
         <option [ngValue]="true">Si</option>
         <option [ngValue]="false">No</option>
       </select>
+    </div>
+
+    <div class="w-32">
+      <label for="porPagina" class="form-label">por pagina</label>
+      <input class=" remove-arrow" formControlName="porPagina" id="porPagina" name="porPagina" type="number">
     </div>
 
     <div>
@@ -52,4 +57,4 @@
   </table>
 </div>
 
-<app-paginador [CantPaginas]="pgUsuarios.pages" [pagActual]="pgUsuarios.page" (cambioPagina)="cargar($event)"></app-paginador>
+<app-paginador [CantPaginas]="pgUsuarios.pages" [pagActual]="pgUsuarios.page" (cambioPagina)="cargar($event, filtros.controls.porPagina.value!)"></app-paginador>

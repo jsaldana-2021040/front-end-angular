@@ -29,7 +29,7 @@ export class PersonasCreateComponent implements OnInit {
     apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     tieneVisa: new FormControl<boolean>(false, { nonNullable: true }),
     empresaCod: new FormControl<number | null>(null, { nonNullable: true, validators: Validators.required }),
-    direcciones: new FormArray<FormGroup<{ direccion: FormControl, zona: FormControl}>>([])
+    direcciones: new FormArray<FormGroup<{ direccion: FormControl, zona: FormControl}>>([], Validators.maxLength(5))
   });
 
   constructor(
