@@ -75,8 +75,4 @@ export class EmpresasListComponent implements OnInit {
     this.showSuccess()
   }
 
-  navegarAgregar(): void {
-    this.router.navigate(['agregar'], { relativeTo: this.route })
-  }
-
 }
