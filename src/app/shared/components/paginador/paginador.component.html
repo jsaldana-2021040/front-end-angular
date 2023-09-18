@@ -1,49 +1,36 @@
-<div class="flex flex-row justify-center space-x-3 pb-8 pt-5 md:mt-28" *ngIf="width >= 700">
+<div class="flex flex-row justify-center space-x-3 my-2">
 
   <div>
-    <button class="btn-p px-3" (click)="clicPag(1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i class="fa-solid fa-angles-left"></i></button>
+    <button class="!bg-transparent px-2 py-1" (click)="clicPag(1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i
+        class="fa-solid fa-angles-left"></i></button>
   </div>
 
   <div>
-    <button class="btn-p px-3" (click)="clicPag(pagActual - 1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i class="fa-solid fa-angle-left"></i></button>
+    <button class="!bg-transparent px-2 py-1" (click)="clicPag(pagActual - 1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i
+        class="fa-solid fa-angle-left"></i></button>
   </div>
 
-  <div *ngFor="let item of numeros">
-    <button class="px-3" (click)="clicPag(item)" [ngClass]="{'btn-p': (item != pagActual)}">
+  <ng-container *ngIf="width >= 700">
+    <div *ngFor="let item of numeros">
+      <button class="px-2 py-1" (click)="clicPag(item)" [ngClass]="{'btn-p': (item != pagActual)}">
         <i class="fa-solid fa-{{item}} fa-xs"></i>
-    </button>
+      </button>
+    </div>
+  </ng-container>
+
+  <div *ngIf="width < 700">
+    <input type="number" id="pag" [formControl]="pag" [value]="pagActual" class="w-14 text-slate-500 remove-arrow"
+      (keyup.enter)="setPag()">
   </div>
 
   <div>
-    <button class="btn-p px-3" (click)="clicPag(pagActual + 1)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i class="fa-solid fa-angle-right"></i></button>
+    <button class="!bg-transparent px-2 py-1" (click)="clicPag(pagActual + 1)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i
+        class="fa-solid fa-angle-right"></i></button>
   </div>
 
   <div>
-    <button class="btn-p px-3" (click)="clicPag(CantPaginas)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i class="fa-solid fa-angles-right"></i></button>
-  </div>
-  
-</div>
-
-<div class="flex flex-row justify-center space-x-3 pb-8 pt-5 md:mt-28" *ngIf="width < 700">
-
-  <div>
-    <button class="btn-p px-3" (click)="clicPag(1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i class="fa-solid fa-angles-left"></i></button>
+    <button class="!bg-transparent px-2 py-1" (click)="clicPag(CantPaginas)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i
+        class="fa-solid fa-angles-right"></i></button>
   </div>
 
-  <div>
-    <button class="btn-p px-3" (click)="clicPag(pagActual - 1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i class="fa-solid fa-angle-left"></i></button>
-  </div>
-
-  <div>
-    <input type="number" id="pag" [formControl]="pag" [value]="pagActual" class="w-14 text-slate-500 remove-arrow" (keyup.enter)="setPag()">
-  </div>
-
-  <div>
-    <button class="btn-p px-3" (click)="clicPag(pagActual + 1)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i class="fa-solid fa-angle-right"></i></button>
-  </div>
-
-  <div>
-    <button class="btn-p px-3" (click)="clicPag(CantPaginas)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i class="fa-solid fa-angles-right"></i></button>
-  </div>
-  
 </div>

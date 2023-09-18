@@ -1,1 +1,10 @@
-<p>table-container works!</p>
+<div class="rounded overflow-hidden w-auto overflow-x-scroll m-4 md:overflow-x-auto">
+  <table>
+
+    <ng-content></ng-content>
+    
+  </table>
+</div>
+
+<app-paginador *ngIf="paginas > 1" [CantPaginas]="paginas" [pagActual]="actual"
+  (cambioPagina)="cambioPagina.emit($event)"></app-paginador>

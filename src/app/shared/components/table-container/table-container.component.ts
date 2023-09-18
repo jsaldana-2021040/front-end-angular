@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-table-container',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   ]
 })
 export class TableContainerComponent {
+
+  @Input() paginas: number = 1;
+  @Input() actual: number = 1;
+  @Output() cambioPagina = new EventEmitter<number>();
 
 }
