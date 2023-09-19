@@ -16,6 +16,7 @@ import { Paginado } from 'src/app/shared/interfaces/paginado';
 })
 export class PersonasListComponent implements OnInit {
   pgPersonas = new Paginado<Personas>();
+  estadoFiltros: boolean = false;
 
   filtros = new FormGroup({
     nombres: new FormControl<string | null>(''),
@@ -47,8 +48,9 @@ export class PersonasListComponent implements OnInit {
 
     let params = new HttpParams().append('pagina', pagina).append('porPagina', porPagina);
 
-    if (this.filtros.controls.porPagina.value! == null || this.filtros.controls.porPagina.value! == 0) {
+    if (this.filtros.controls.porPagina.value == null || this.filtros.controls.porPagina.value <= 0 || this.filtros.controls.porPagina.value % 1 != 0) {
       this.filtros.controls.porPagina.setValue(10)
+      params = new HttpParams().append('pagina', pagina).append('porPagina', 10);
     }
 
     for (const key in this.filtros.controls) {
@@ -61,6 +63,10 @@ export class PersonasListComponent implements OnInit {
       next: res => this.pgPersonas = res,
       error: err => console.log('Error al obtener datos')
     });
+  }
+
+  mostrarFiltros(): void {
+    this.estadoFiltros = !this.estadoFiltros
   }
 
   delete( id: number) : void{

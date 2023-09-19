@@ -1,19 +1,19 @@
-<div class="flex flex-row justify-center space-x-3 my-2">
+<div class="flex flex-row justify-center space-x-3 my-6">
 
   <div>
-    <button class="!bg-transparent px-2 py-1" (click)="clicPag(1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i
+    <button class="!bg-transparent px-2 py-1 border-none" (click)="clicPag(1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i
         class="fa-solid fa-angles-left"></i></button>
   </div>
 
   <div>
-    <button class="!bg-transparent px-2 py-1" (click)="clicPag(pagActual - 1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i
+    <button class="!bg-transparent px-2 py-1 border-none" (click)="clicPag(pagActual - 1)" *ngIf="CantPaginas > 1 && pagActual > 1"><i
         class="fa-solid fa-angle-left"></i></button>
   </div>
 
   <ng-container *ngIf="width >= 700">
     <div *ngFor="let item of numeros">
       <button class="px-2 py-1" (click)="clicPag(item)" [ngClass]="{'btn-p': (item != pagActual)}">
-        <i class="fa-solid fa-{{item}} fa-xs"></i>
+        <i *ngFor="let num of item.toString().split('')" class="fa-solid fa-{{num}} fa-xs"></i>
       </button>
     </div>
   </ng-container>
@@ -24,12 +24,12 @@
   </div>
 
   <div>
-    <button class="!bg-transparent px-2 py-1" (click)="clicPag(pagActual + 1)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i
+    <button class="!bg-transparent px-2 py-1 border-none" (click)="clicPag(pagActual + 1)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i
         class="fa-solid fa-angle-right"></i></button>
   </div>
 
   <div>
-    <button class="!bg-transparent px-2 py-1" (click)="clicPag(CantPaginas)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i
+    <button class="!bg-transparent px-2 py-1 border-none" (click)="clicPag(CantPaginas)" *ngIf="CantPaginas > 1 && pagActual < CantPaginas"><i
         class="fa-solid fa-angles-right"></i></button>
   </div>
 

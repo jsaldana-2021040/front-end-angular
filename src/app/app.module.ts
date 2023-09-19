@@ -32,6 +32,8 @@ import { LoginComponent } from './components/login/login/login.component';
 import { TokenInterceptorInterceptor } from './shared/utils/token-interceptor.interceptor';
 import { PaginadorComponent } from './shared/components/paginador/paginador.component';
 import { TableContainerComponent } from './shared/components/table-container/table-container.component';
+import { PokeApiListComponent } from './components/pokeApi/poke-api-list/poke-api-list.component';
+import { PokeApiDetailsComponent } from './components/pokeApi/poke-api-details/poke-api-details.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { TableContainerComponent } from './shared/components/table-container/tab
     LoginComponent,
     PaginadorComponent,
     TableContainerComponent,
+    PokeApiListComponent,
+    PokeApiDetailsComponent,
   ],
   imports: [
     BrowserModule,

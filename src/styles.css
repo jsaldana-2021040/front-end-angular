@@ -17,6 +17,10 @@
     margin: 0;
   }
 
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
   [type="text"],
   [type="password"],
   [type="email"],

@@ -16,6 +16,7 @@ import { HttpParams } from '@angular/common/http';
 export class UsuariosListComponent implements OnInit {
   
   pgUsuarios = new Paginado<Usuarios>();
+  estadoFiltros: boolean = false;
 
   filtros = new FormGroup({
     email: new FormControl<string | null>(''),
@@ -44,8 +45,9 @@ export class UsuariosListComponent implements OnInit {
 
     let params = new HttpParams().append('pagina', pagina).append('porPagina', porPagina);
 
-    if (this.filtros.controls.porPagina.value! == null || this.filtros.controls.porPagina.value! == 0) {
+    if (this.filtros.controls.porPagina.value == null || this.filtros.controls.porPagina.value <= 0 || this.filtros.controls.porPagina.value % 1 != 0) {
       this.filtros.controls.porPagina.setValue(10)
+      params = new HttpParams().append('pagina', pagina).append('porPagina', 10);
     }
 
     for (const key in this.filtros.controls) {
@@ -58,6 +60,10 @@ export class UsuariosListComponent implements OnInit {
       next: res => this.pgUsuarios = res,
       error: err => console.log('Error al obtener datos')
     });
+  }
+
+  mostrarFiltros(): void {
+    this.estadoFiltros = !this.estadoFiltros
   }
 
   delete( id: number) : void{

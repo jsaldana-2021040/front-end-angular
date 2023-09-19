@@ -41,8 +41,8 @@ export class PaginadorComponent implements OnInit, OnChanges {
   }
 
   setPag(): void {
-    if (this.pag.value! <= this.CantPaginas && this.pag.value != null) {
-      this.clicPag(this.pag.value!)
+    if (this.pag.value! <= this.CantPaginas && this.pag.value! > 0 && this.pag.value != null && this.pag.value % 1 == 0 ) {
+      this.clicPag(this.pag.value)
     } else {
       this.pag.setValue(this.pagActual)
     }

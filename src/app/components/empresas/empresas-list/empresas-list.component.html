@@ -1,39 +1,42 @@
 <page-header icono="city" nombrePagina="Empresas" />
 
-<form [formGroup]="filtros" (submit)="cargar(1, filtros.controls.porPagina.value!)" autocomplete="off">
-  <div class="sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5">
-    <div class="w-full">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input formControlName="nombre" id="nombre" name="nombre" type="text">
+<a class="ml-5 text-xl font-bold hover:cursor-pointer" (click)="mostrarFiltros()">Filtros <i [ngClass]="estadoFiltros ? 'rotate-0' : 'rotate-180'" class="fa-solid fa-angle-up transition-all"></i></a>
+<ng-container *ngIf="estadoFiltros">
+  <form [formGroup]="filtros" (submit)="cargar(1, filtros.controls.porPagina.value!)" autocomplete="off">
+    <div class="card sm:flex sm:flex-row sm:space-x-4 mx-4 mb-7 ml-5 mt-5">
+      <div class="w-full">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input formControlName="nombre" id="nombre" name="nombre" type="text">
+      </div>
+      <div class="w-full">
+        <label for="direccion" class="form-label">Direccion</label>
+        <input formControlName="direccion" id="direccion" name="direccion" type="text">
+      </div>
+      <div class="w-full">
+        <label for="telefono" class="form-label">Telefono</label>
+        <input formControlName="telefono" id="telefono" name="telefono" type="text">
+      </div>
+      <div class="w-full">
+        <label for="activo" class="form-label">Activo</label>
+        <select formControlName="activo" name="activo" id="activo">
+          <option [ngValue]="null">Todos</option>
+          <option [ngValue]="true">Si</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+  
+      <div class="w-full">
+        <label for="porPagina" class="form-label">por pagina</label>
+        <input class=" remove-arrow" formControlName="porPagina" id="porPagina" type="number">
+      </div>
+  
+      <div>
+        <label for="direccion" class="form-label">&nbsp;</label>
+        <button type="submit" class="btn-p">Filtrar</button>
+      </div>
     </div>
-    <div class="w-full">
-      <label for="direccion" class="form-label">Direccion</label>
-      <input formControlName="direccion" id="direccion" name="direccion" type="text">
-    </div>
-    <div class="w-full">
-      <label for="telefono" class="form-label">Telefono</label>
-      <input formControlName="telefono" id="telefono" name="telefono" type="text">
-    </div>
-    <div class="w-full">
-      <label for="activo" class="form-label">Activo</label>
-      <select formControlName="activo" name="activo" id="activo">
-        <option [ngValue]="null">Todos</option>
-        <option [ngValue]="true">Si</option>
-        <option [ngValue]="false">No</option>
-      </select>
-    </div>
-
-    <div class="w-full">
-      <label for="porPagina" class="form-label">por pagina</label>
-      <input class=" remove-arrow" formControlName="porPagina" id="porPagina" type="number">
-    </div>
-
-    <div>
-      <label for="direccion" class="form-label">&nbsp;</label>
-      <button type="submit" class="btn-p">Filtrar</button>
-    </div>
-  </div>
-</form>
+  </form>
+</ng-container>
 
 <app-table-container [paginas]="pgEmpresas.pages" [actual]="pgEmpresas.page" (cambioPagina)="cargar($event , filtros.controls.porPagina.value!)">
 

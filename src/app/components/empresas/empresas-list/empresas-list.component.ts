@@ -18,13 +18,14 @@ import { Paginado } from 'src/app/shared/interfaces/paginado';
 export class EmpresasListComponent implements OnInit {
 
   pgEmpresas = new Paginado<Empresas>();
+  estadoFiltros: boolean = false;
 
   filtros = new FormGroup({
     nombre: new FormControl<string | null>(''),
     direccion: new FormControl<string | null>(''),
     telefono: new FormControl<string | null>(''),
     activo: new FormControl<boolean | null>(true),
-    porPagina: new FormControl<number>(10, {nonNullable: true}),
+    porPagina: new FormControl<number>(10, {nonNullable: true }),
   });
 
   constructor(
@@ -49,8 +50,9 @@ export class EmpresasListComponent implements OnInit {
   cargar(pagina: number, porPagina : number): void {
     let params = new HttpParams().append('pagina', pagina).append('porPagina', porPagina);
 
-    if (this.filtros.controls.porPagina.value == null || this.filtros.controls.porPagina.value == 0 || this.filtros.controls.porPagina.value <= 0) {
+    if (this.filtros.controls.porPagina.value == null || this.filtros.controls.porPagina.value <= 0 || this.filtros.controls.porPagina.value % 1 != 0) {
       this.filtros.controls.porPagina.setValue(10)
+      params = new HttpParams().append('pagina', pagina).append('porPagina', 10);
     }
 
     for (const key in this.filtros.controls) {
@@ -63,6 +65,10 @@ export class EmpresasListComponent implements OnInit {
       next: res => this.pgEmpresas = res,
       error: err => console.log('Error al obtener datos')
     });
+  }
+
+  mostrarFiltros(): void {
+    this.estadoFiltros = !this.estadoFiltros
   }
 
   delete(id: number): void {
