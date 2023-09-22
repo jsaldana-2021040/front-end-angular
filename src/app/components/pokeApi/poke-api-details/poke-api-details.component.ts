@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Poke } from 'src/app/shared/interfaces/poke';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { PokeData } from 'src/app/shared/interfaces/poke';
 import { PokeHabilidades } from 'src/app/shared/interfaces/pokeHabilidades';
 import { pokeService } from 'src/app/shared/services/poke.service';
 
@@ -9,20 +9,27 @@ import { pokeService } from 'src/app/shared/services/poke.service';
   styles: [
   ]
 })
-export class PokeApiDetailsComponent{
+export class PokeApiDetailsComponent implements OnChanges {
 
-  @Input() data = new Poke
+  @Input() url: string | null = null;
+
+  data: PokeData | null = null;
 
   habPokemon = new PokeHabilidades
-
-  mostrarInfo : boolean = false
 
   constructor(
     private pokeSvc: pokeService,
   ) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.pokeSvc.getByUrl(changes['url'].currentValue).subscribe({
+      next: res => {        
+        this.data = res;
+      }, error: err => console.log('Error al obtener datos')
+    });
+  }
+
   mostrarHabilidad(url: string): void {
-    this.mostrarInfo = true
     this.pokeSvc.getHab(url).subscribe({
       next: res => {this.habPokemon = res, console.log(res);
       },
@@ -30,7 +37,7 @@ export class PokeApiDetailsComponent{
     });
   }
 
-  obtenerTipo(tipe : string) : string {
+  obtenerColorTipo(tipe : string) : string {
     switch (tipe) {
       case 'grass':
         return 'bg-gradient-to-b from-green-500 via-green-300 to-green-500'

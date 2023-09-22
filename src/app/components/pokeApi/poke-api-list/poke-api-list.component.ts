@@ -11,7 +11,7 @@ import { pokeService } from 'src/app/shared/services/poke.service';
 })
 export class PokeApiListComponent implements OnInit {
 
-  @Output() clicList = new EventEmitter<string>();
+  @Output() selectedPokemon = new EventEmitter<string>();
 
   listPokemon = new Poke;
 
@@ -39,8 +39,8 @@ export class PokeApiListComponent implements OnInit {
     });
   }
 
-  clicPokemon(url: string): void {
-    this.estadoPokemon = true
-    this.clicList.emit(url)
+  seleccionarPokemon(url: string): void {
+    this.selectedPokemon.emit(url);
   }
+
 }

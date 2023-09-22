@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http"
-import { Poke } from "../interfaces/poke";
+import { Poke, PokeData } from "../interfaces/poke";
 import { Observable, first } from "rxjs";
 import { Paginado } from "../interfaces/paginado";
 import { Injectable } from "@angular/core";
@@ -22,8 +22,8 @@ export class pokeService {
     );
   }
 
-  getByUrl(url : string): Observable<Poke> {
-    return this.http.get<Poke>(url).pipe(
+  getByUrl(url : string): Observable<PokeData> {
+    return this.http.get<PokeData>(url).pipe(
       first()
     );
   }

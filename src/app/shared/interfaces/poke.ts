@@ -12,23 +12,26 @@ export interface PokeDataAbilities {
   slot: number
 }
 
-export class Poke{
+export class Poke {
   count: number;
   next: string;
   previous: string;
   results: PokeItems[];
 
+  constructor() {
+    this.count = 0;
+    this.next = '';
+    this.previous = '';
+    this.results = [];
+  }
+}
+
+export interface PokeData {
   id: number
   base_experience: number;
+  name: string;
   abilities: PokeDataAbilities[];
 
-  forms: [
-    {
-      name: string,
-      url: string
-    }
-  ];
-  
   types: [
     {
       type: {
@@ -39,50 +42,12 @@ export class Poke{
 
   stats: [
     {
-        base_stat: number,
-        effort: number,
-        stat: {
-            name: string,
-            url: string
-        }
+      base_stat: number,
+      effort: number,
+      stat: {
+        name: string,
+        url: string
+      }
     }
-  ]
-
-  constructor () {
-    this.count = 0;
-    this.next = '';
-    this.previous = '';
-    this.results = [];
-
-    this.id = 0
-    this.base_experience = 0
-    this.abilities = []
-    
-    this.forms = [
-      {
-        name: '',
-        url: ''
-      }
-    ]
-    
-    this.types = [
-      {
-        type: {
-          name: '',
-        }
-      }
-    ]
-
-    this.stats= [
-      {
-          base_stat: 0,
-          effort: 0,
-          stat: {
-              name: '',
-              url: ''
-          }
-      }
-    ]
-
-  }
+  ];
 }

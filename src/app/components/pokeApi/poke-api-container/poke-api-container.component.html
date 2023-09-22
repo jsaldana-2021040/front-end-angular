@@ -1,4 +1,8 @@
-<app-poke-api-list (clicList)="mostrarPokemon($event)">
-  <app-poke-api-details [data]="dataPokemon" ></app-poke-api-details>
-</app-poke-api-list>
+<div class="flex">
 
+  <app-poke-api-details class="w-full mr-20 center my-auto" [url]="urlPokemon"></app-poke-api-details>
+
+  <app-poke-api-list (selectedPokemon)="urlPokemon = $event"></app-poke-api-list>
+
+
+</div>
