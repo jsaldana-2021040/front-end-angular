@@ -1,30 +1,25 @@
 <div class="flex">
-  <div *ngIf="estadoPokemon" class="w-full">
-    <div class="flex justify-center mt-56">
-      <div>
-        <ng-container *ngFor="let item of dataPokemon.forms">
-          <div class="card shadow-none text-center py-0 px-4 bg-red-500 dark:bg-red-500 border-4 border-slate-800">
-            <div class="px-2 py-1 bg-red-400">
-              <div class="py-4 bg-white text-lg dark:text-slate-50 dark:bg-slate-700">{{item.name}}</div>
-            </div>
-          </div>
-        </ng-container>
-        <img *ngIf="dataPokemon.id != 0"
-          src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/{{dataPokemon.id}}.png?raw=true"
-          width="300">
-        <div class="inline-flex justify-center w-full space-x-5">
-          <ng-container *ngFor="let item of dataPokemon.types">
-            <div class="card px-3 py-2">{{item.type.name}}</div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+  <div *ngIf="estadoPokemon" class="w-full mr-20 center my-auto">
+      <app-poke-api-details [data]="dataPokemon"></app-poke-api-details>
   </div>
 
   <div class="space-y-5 mt-10 mb-10 ml-auto border-black">
-    <div (click)="mostrarPokemon(item.name)" class="card py-0 px-0 flex shadow-none mb-0 w-96 hover:translate-x-2 transition-all" *ngFor="let item of listPokemon.results">
-        <img class="bg-red-500 px-3 py-2 rounded-lg " src="https://github.com/PokeAPI/sprites/blob/master/sprites/items/poke-ball.png?raw=true" width="70">
-        <div class="pt-4 pl-3">{{item.name}}</div>
+
+    <div>
+      <button *ngIf="listPokemon.previous != null" (click)="cambiarPagina(listPokemon.previous)" class="bg-transparent px-2 py-1 border-none"><i class="fa-solid fa-angle-up text-3xl"></i></button>
+    </div>
+    
+    <div (click)="mostrarPokemon(item.url)" *ngFor="let item of listPokemon.results">
+      <div class="card py-0 px-0 flex shadow-none mb-0 w-96 hover:translate-x-2 transition-all hover:cursor-pointer">
+          <img class="bg-red-500 px-3 pt-2 pb-1 rounded-lg" src="https://art.pixilart.com/sr2a947c8f967b8.png" width="60">
+          <div class="my-auto ml-5">{{item.name}}</div>
       </div>
     </div>
+    
+    <div>
+      <button *ngIf="listPokemon.next" (click)="cambiarPagina(listPokemon.next)" class="bg-transparent px-2 py-1 border-none"><i class="fa-solid fa-angle-down text-3xl"></i></button>
+    </div>
+  
+  </div>
+
 </div>

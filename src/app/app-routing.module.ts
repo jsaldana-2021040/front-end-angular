@@ -17,7 +17,7 @@ import { LoginComponent } from './components/login/login/login.component';
 import { personasGuard } from './shared/guards/personas-guard.guard';
 import { empresasGuard } from './shared/guards/empresas-guard.guard';
 import { usuariosGuard } from './shared/guards/usuarios-guard.guard';
-import { PokeApiListComponent } from './components/pokeApi/poke-api-list/poke-api-list.component';
+import { PokeApiContainerComponent } from './components/pokeApi/poke-api-container/poke-api-container.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'usuarios', component: UsuariosListComponent, canActivate:[usuariosGuard]},
   { path: 'usuarios/agregar', component: UsuariosCreateComponent, canActivate:[usuariosGuard]},
   { path: 'usuarios/editar/:id', component: UsuariosEditComponent, canActivate:[usuariosGuard]},
-  { path: 'pokeapi', component: PokeApiListComponent},
+  { path: 'pokeapi', component: PokeApiContainerComponent},
   { path: '**', component: NotFoundComponent },
 ];
 

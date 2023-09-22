@@ -6,7 +6,12 @@ module.exports = {
     "./src/index.html"
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '1.5': '6px',
+        '11': '42px',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

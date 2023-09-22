@@ -34,6 +34,7 @@ import { PaginadorComponent } from './shared/components/paginador/paginador.comp
 import { TableContainerComponent } from './shared/components/table-container/table-container.component';
 import { PokeApiListComponent } from './components/pokeApi/poke-api-list/poke-api-list.component';
 import { PokeApiDetailsComponent } from './components/pokeApi/poke-api-details/poke-api-details.component';
+import { PokeApiContainerComponent } from './components/pokeApi/poke-api-container/poke-api-container.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { PokeApiDetailsComponent } from './components/pokeApi/poke-api-details/p
     TableContainerComponent,
     PokeApiListComponent,
     PokeApiDetailsComponent,
+    PokeApiContainerComponent,
   ],
   imports: [
     BrowserModule,
