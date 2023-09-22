@@ -11,9 +11,9 @@ import { pokeService } from 'src/app/shared/services/poke.service';
 })
 export class PokeApiListComponent implements OnInit {
 
-  listPokemon = new Poke;
+  @Output() clicList = new EventEmitter<string>();
 
-  dataPokemon = new Poke;
+  listPokemon = new Poke;
 
   estadoPokemon: boolean = false
 
@@ -39,12 +39,8 @@ export class PokeApiListComponent implements OnInit {
     });
   }
 
-  mostrarPokemon(url: string): void {
+  clicPokemon(url: string): void {
     this.estadoPokemon = true
-
-    this.pokeSvc.getByUrl(url).subscribe({
-      next: res => this.dataPokemon = res,
-      error: err => console.log('Error al obtener datos')
-    });
+    this.clicList.emit(url)
   }
 }

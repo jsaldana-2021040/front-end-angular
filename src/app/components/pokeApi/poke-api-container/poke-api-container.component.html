@@ -1,1 +1,4 @@
-<app-poke-api-list></app-poke-api-list>
+<app-poke-api-list (clicList)="mostrarPokemon($event)">
+  <app-poke-api-details [data]="dataPokemon" ></app-poke-api-details>
+</app-poke-api-list>
+
