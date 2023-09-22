@@ -4,12 +4,53 @@
     <div class="px-3 py-2 bg-red-400">
       LV:{{data.base_experience}} {{data.name}}
 
-      <div class="pt-6 pb-2 bg-white text-lg dark:text-slate-50 dark:bg-slate-700">
+      <div class="bg-white">
+
+        <div class="lg:flex">
+
+          <!-- imagen y tipos -->
+          <div class="lg:w-1/3">
+            <div class="h-60 flex">
+              <img class="m-auto scale-150"
+                src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/showdown/shiny/{{data.id}}.gif?raw=true">
+            </div>
+
+            <div class="flex flex-row justify-center items-center space-x-4 h-16">
+              <div *ngFor="let item of data.types" class="card mb-0 w-24 px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
+            </div>
+          </div>
+
+          <!-- estadisticas -->
+          <div class="flex flex-col lg:w-2/3 py-5">
+            <div class="h-1/6 flex flex-row" *ngFor="let stat of data.stats">
+              <div class="flex items-center w-56 pl-5">
+                {{stat.stat.name}}
+              </div>
+
+              <div class="w-full flex items-center pr-20">
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                  <div [style.width.%]="(stat.base_stat * 100) / 255"
+                    class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-md">
+                    {{stat.base_stat}}</div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+
+        <!-- habilidades -->
+        <div class="border">
+          habilidades
+        </div>
+      </div>
+
+      <!-- <div class="pt-6 pb-2 bg-white text-lg dark:text-slate-50 dark:bg-slate-700">
 
         <div class="inline-flex w-full">
 
           <div class="my-auto">
-            <img class="ml-5" *ngIf="data.id != 0"
+            <img class="ml-5"
               src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/showdown/shiny/{{data.id}}.gif?raw=true"
               width="230">
 
@@ -18,24 +59,20 @@
                 <div class="card px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
               </ng-container>
             </div>
-
           </div>
 
-          <div class="ml-10 block space-y-7">
-            <ng-container *ngFor="let item of data.stats">
-              <div class="card shadow-none mx-auto my-auto px-3 py-0 dark:bg-slate-500">{{item.stat.name}}</div>
-            </ng-container>
-          </div>
+          <div class="grid grid-cols-1 gap-4 w-full mx-10">
+            <div class="card flex py-2 px-3 text-left" *ngFor="let stat of data.stats">
+              <div class="grid grid-cols-2">
+                <div>{{stat.stat.name}}</div>
 
-
-          <div class="mt-1.5 space-y-11 pr-5 ml-5 block">
-            <ng-container *ngFor="let item of data.stats">
-              <div class="w-40 bg-gray-200 rounded-full dark:bg-gray-700">
-                <div [style.width.%]="item.base_stat"
-                  class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-md">
-                  {{item.base_stat}}</div>
+                <div class="w-40 bg-gray-200 rounded-full dark:bg-gray-700">
+                  <div [style.width.%]="stat.base_stat"
+                    class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-md">
+                    {{stat.base_stat}}</div>
+                </div>
               </div>
-            </ng-container>
+            </div>
           </div>
 
         </div>
@@ -57,7 +94,7 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
 
     </div>
 
