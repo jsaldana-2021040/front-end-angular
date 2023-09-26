@@ -1,22 +1,30 @@
-<div class="w-full" *ngIf="data != null">
+<div class="w-full mt-10" *ngIf="data != null">
   <div class="card shadow-none text-center py-0 px-6 bg-red-500 dark:bg-red-500 border-4 border-slate-800">
 
-    <div class="px-3 py-2 bg-red-400">
-      LV:{{data.base_experience}} {{data.name}}
+    <div class="px-3 py-2 bg-red-400 font-pixel text-xl">
 
-      <div class="bg-white">
+      <div class="bg-white dark:bg-slate-500">
 
         <div class="lg:flex">
 
           <!-- imagen y tipos -->
           <div class="lg:w-1/3">
+            <div class="mt-5">
+              <div>
+                Lv:{{data.base_experience}}
+              </div>
+              <div>
+                {{data.name}}
+              </div>
+            </div>
             <div class="h-60 flex">
               <img class="m-auto scale-150"
                 src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/showdown/shiny/{{data.id}}.gif?raw=true">
             </div>
 
             <div class="flex flex-row justify-center items-center space-x-4 h-16">
-              <div *ngFor="let item of data.types" class="card mb-0 w-24 px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
+              <div *ngFor="let item of data.types"
+                class="card mb-0 w-24 px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
             </div>
           </div>
 
@@ -35,66 +43,34 @@
                 </div>
               </div>
             </div>
-  
+
           </div>
         </div>
 
         <!-- habilidades -->
-        <div class="border">
-          habilidades
+        <div class="border border-white dark:border-slate-500">
+          <div class="ml-5 flex space-x-5 mt-10 mb-10">
+            <ng-container *ngFor="let item of data.abilities">
+              <div (click)="mostrarHabilidad(item.ability.url)" class="card py-0 m-0 shadow-none">
+                <div>{{item.ability.name}}</div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div *ngIf="stadoHab" class="card p-0 ml-5 mt-3 mr-5">
+            <div *ngFor="let i of habPokemon.effect_entries">
+              <div *ngIf="i.language.name == 'en'" class="text-left ml-2">{{i.short_effect}}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ataques -->
+        <div class="p-0 ml-5 mt-3 mr-5 grid grid-cols-2 pb-1 space-x-3">
+          <div *ngFor="let item of data.moves; index as i">
+            <div *ngIf="i<4" class="card mb-0 shadow-none py-2">{{item.move.name}}</div>
+          </div>
         </div>
       </div>
-
-      <!-- <div class="pt-6 pb-2 bg-white text-lg dark:text-slate-50 dark:bg-slate-700">
-
-        <div class="inline-flex w-full">
-
-          <div class="my-auto">
-            <img class="ml-5"
-              src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/showdown/shiny/{{data.id}}.gif?raw=true"
-              width="230">
-
-            <div class="inline-flex justify-center w-full space-x-5 pt-10">
-              <ng-container *ngFor="let item of data.types">
-                <div class="card px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
-              </ng-container>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 gap-4 w-full mx-10">
-            <div class="card flex py-2 px-3 text-left" *ngFor="let stat of data.stats">
-              <div class="grid grid-cols-2">
-                <div>{{stat.stat.name}}</div>
-
-                <div class="w-40 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div [style.width.%]="stat.base_stat"
-                    class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-md">
-                    {{stat.base_stat}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="ml-5 flex space-x-5 mt-10">
-          <div class="card py-0 m-0 shadow-none">
-            <p>Hability</p>
-          </div>
-          <ng-container *ngFor="let item of data.abilities">
-            <div (click)="mostrarHabilidad(item.ability.url)" class="card py-0 m-0 shadow-none">
-              <div>{{item.ability.name}}</div>
-            </div>
-          </ng-container>
-        </div>
-
-        <div class="card p-0 ml-5 mt-3 mr-5">
-          <div *ngFor="let i of habPokemon.effect_entries">
-            <div *ngIf="i.language.name == 'en'" class="text-left ml-2">{{i.effect}}</div>
-          </div>
-        </div>
-
-      </div> -->
 
     </div>
 

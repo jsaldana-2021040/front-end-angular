@@ -9,9 +9,11 @@ import { pokeService } from 'src/app/shared/services/poke.service';
   styles: [
   ]
 })
-export class PokeApiDetailsComponent implements OnChanges {
+export class PokeApiDetailsComponent implements OnChanges, OnInit {
 
   @Input() url: string | null = null;
+
+  stadoHab: boolean = false
 
   data: PokeData | null = null;
 
@@ -21,15 +23,21 @@ export class PokeApiDetailsComponent implements OnChanges {
     private pokeSvc: pokeService,
   ) { }
 
+  ngOnInit(): void {
+    
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.pokeSvc.getByUrl(changes['url'].currentValue).subscribe({
-      next: res => {        
+      next: res => { 
+        this.stadoHab = false
         this.data = res;
       }, error: err => console.log('Error al obtener datos')
     });
   }
 
   mostrarHabilidad(url: string): void {
+    this.stadoHab = true
     this.pokeSvc.getHab(url).subscribe({
       next: res => {this.habPokemon = res, console.log(res);
       },
@@ -89,6 +97,9 @@ export class PokeApiDetailsComponent implements OnChanges {
 
       case 'psychic':
         return 'bg-gradient-to-b from-rose-400 via-rose-300 to-rose-400'
+
+      case 'dragon':
+        return 'bg-gradient-to-b from-violet-600 via-violet-400 to-violet-600'
 
       default :
         return ''

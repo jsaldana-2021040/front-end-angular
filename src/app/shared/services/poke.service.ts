@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Poke, PokeData } from "../interfaces/poke";
-import { Observable, first } from "rxjs";
-import { Paginado } from "../interfaces/paginado";
+import { Observable, filter, first, map } from "rxjs";
 import { Injectable } from "@angular/core";
 import { PokeHabilidades } from "../interfaces/pokeHabilidades";
 
@@ -10,7 +9,7 @@ import { PokeHabilidades } from "../interfaces/pokeHabilidades";
 })
 
 export class pokeService {
-  url : string ="https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
+  url: string = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
 
   constructor(
     private http: HttpClient
@@ -18,17 +17,23 @@ export class pokeService {
 
   get(): Observable<Poke> {
     return this.http.get<Poke>(this.url).pipe(
-      first()
+      first(),
     );
   }
 
-  getByUrl(url : string): Observable<PokeData> {
+  getAll(): Observable<Poke> {
+    return this.http.get<Poke>('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0').pipe(
+      first(),
+    )
+  }
+
+  getByUrl(url: string): Observable<PokeData> {
     return this.http.get<PokeData>(url).pipe(
       first()
     );
   }
 
-  getHab(url : string): Observable<PokeHabilidades> {
+  getHab(url: string): Observable<PokeHabilidades> {
     return this.http.get<PokeHabilidades>(url).pipe(
       first()
     );

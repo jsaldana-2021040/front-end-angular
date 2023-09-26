@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PersonasService } from 'src/app/shared/services/personas.service';
 import { EmpresasService } from 'src/app/shared/services/empresas.service';
 import { Empresas } from 'src/app/shared/interfaces/empresas';
-import { Subscription, filter, map} from 'rxjs';
+import { Subscription} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToastrService } from 'ngx-toastr';
 import { HttpParams } from '@angular/common/http';

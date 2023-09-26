@@ -50,4 +50,13 @@ export interface PokeData {
       }
     }
   ];
+
+  moves: [
+    {
+      move: {
+        name: string,
+        url: string
+      }
+    }
+  ]
 }

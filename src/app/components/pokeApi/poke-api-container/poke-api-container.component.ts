@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Poke } from 'src/app/shared/interfaces/poke';
 import { pokeService } from 'src/app/shared/services/poke.service';
 

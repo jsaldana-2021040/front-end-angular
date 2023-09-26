@@ -11,6 +11,9 @@ module.exports = {
         '1.5': '6px',
         '11': '42px',
       },
+      fontFamily: {
+        'pixel': 'VT323'
+      }
     },
   },
   plugins: [
