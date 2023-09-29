@@ -35,6 +35,9 @@ import { TableContainerComponent } from './shared/components/table-container/tab
 import { PokeApiListComponent } from './components/pokeApi/poke-api-list/poke-api-list.component';
 import { PokeApiDetailsComponent } from './components/pokeApi/poke-api-details/poke-api-details.component';
 import { PokeApiContainerComponent } from './components/pokeApi/poke-api-container/poke-api-container.component';
+import { PokeApiHabilidadesComponent } from './components/pokeApi/poke-api-habilidades/poke-api-habilidades/poke-api-habilidades.component';
+import { PokeApiAtaquesComponent } from './components/pokeApi/poke-api-ataques/poke-api-ataques/poke-api-ataques.component';
+import { PokeApiDatosListComponent } from './components/pokeApi/poke-api-datos-list/poke-api-datos-list/poke-api-datos-list.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { PokeApiContainerComponent } from './components/pokeApi/poke-api-contain
     PokeApiListComponent,
     PokeApiDetailsComponent,
     PokeApiContainerComponent,
+    PokeApiHabilidadesComponent,
+    PokeApiAtaquesComponent,
+    PokeApiDatosListComponent,
   ],
   imports: [
     BrowserModule,

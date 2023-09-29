@@ -1,8 +1,3 @@
-export interface PokeItems {
-  name: string,
-  url: string
-}
-
 export interface PokeDataAbilities {
   ability: {
     name: string,
@@ -16,13 +11,17 @@ export class Poke {
   count: number;
   next: string;
   previous: string;
-  results: PokeItems[];
+  name: string;
+  url: string;
+  id: number;
 
   constructor() {
     this.count = 0;
     this.next = '';
     this.previous = '';
-    this.results = [];
+    this.name = '';
+    this.url = '';
+    this.id = 1;
   }
 }
 
@@ -59,4 +58,9 @@ export interface PokeData {
       }
     }
   ]
+}
+
+export interface PokeDataList {
+  name: string,
+  url: string
 }

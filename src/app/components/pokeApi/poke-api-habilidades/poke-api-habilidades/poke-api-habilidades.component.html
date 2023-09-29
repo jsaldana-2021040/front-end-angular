@@ -1,0 +1,6 @@
+<div class="card py-0 m-0 dark:shadow-none shadow-none lg:h-32 h-56">
+  <span class="font-semibold">{{upperCase(habPokemon.name)}}</span>
+  <div *ngFor="let i of habPokemon.effect_entries">
+    <div *ngIf="i.language.name == 'en'" class="text-left">{{i.short_effect}}</div>
+  </div>
+</div>

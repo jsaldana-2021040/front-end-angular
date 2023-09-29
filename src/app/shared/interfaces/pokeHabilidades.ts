@@ -9,9 +9,15 @@ export class PokeHabilidades {
       short_effect: string
     }
   ]
+  name: string
 
-  constructor () {
-    this.effect_entries= [
+  type: {
+    name: string,
+    url: string
+  }
+
+  constructor() {
+    this.effect_entries = [
       {
         effect: '',
         language: {
@@ -21,5 +27,11 @@ export class PokeHabilidades {
         short_effect: ''
       }
     ]
+    this.name = ''
+
+    this.type = {
+      name: '',
+      url: ''
+    }
   }
 }

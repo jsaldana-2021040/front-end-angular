@@ -1,8 +1,9 @@
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpParams } from "@angular/common/http"
 import { Poke, PokeData } from "../interfaces/poke";
 import { Observable, filter, first, map } from "rxjs";
 import { Injectable } from "@angular/core";
 import { PokeHabilidades } from "../interfaces/pokeHabilidades";
+import { Paginado } from "../interfaces/paginado";
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,6 @@ export class pokeService {
     );
   }
 
-  getAll(): Observable<Poke> {
-    return this.http.get<Poke>('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0').pipe(
-      first(),
-    )
-  }
-
   getByUrl(url: string): Observable<PokeData> {
     return this.http.get<PokeData>(url).pipe(
       first()
@@ -39,8 +34,8 @@ export class pokeService {
     );
   }
 
-  getPg(url: string): Observable<Poke> {
-    return this.http.get<Poke>(url).pipe(
+  getPg(params: HttpParams): Observable<Paginado<Poke>> {
+    return this.http.get<Paginado<Poke>>('http://localhost:5000/pokemons/pg', { params: params }).pipe(
       first()
     );
   }

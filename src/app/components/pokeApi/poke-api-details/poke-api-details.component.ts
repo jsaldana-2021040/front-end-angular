@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { PokeData } from 'src/app/shared/interfaces/poke';
 import { PokeHabilidades } from 'src/app/shared/interfaces/pokeHabilidades';
 import { pokeService } from 'src/app/shared/services/poke.service';
@@ -9,43 +9,55 @@ import { pokeService } from 'src/app/shared/services/poke.service';
   styles: [
   ]
 })
-export class PokeApiDetailsComponent implements OnChanges, OnInit {
+export class PokeApiDetailsComponent implements OnChanges {
 
   @Input() url: string | null = null;
 
-  stadoHab: boolean = false
+  @Output() clicLista = new EventEmitter<boolean>();
+
+  @Output() setMusica = new EventEmitter<any>();
+
+  estadoInicio: boolean = true
+
+  estadoMusica: boolean = false;
+
+  musica = new Audio();
 
   data: PokeData | null = null;
 
   habPokemon = new PokeHabilidades
 
+  imageSize: string = '60'
+
   constructor(
     private pokeSvc: pokeService,
   ) { }
 
-  ngOnInit(): void {
-    
+  clicInicio(): void {
+    this.clicLista.emit(true)
+    this.estadoMusica = true
+
+    this.musica.src = '../../../../assets/Lavender Town.mp3'
+
+    this.musica.load()
+    this.musica.play()
+
+    this.musica.loop = true
+
+    this.setMusica.emit(this.musica)
+    this.estadoInicio = false
+    this.imageSize = "90"
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.pokeSvc.getByUrl(changes['url'].currentValue).subscribe({
-      next: res => { 
-        this.stadoHab = false
+      next: res => {
         this.data = res;
       }, error: err => console.log('Error al obtener datos')
     });
   }
 
-  mostrarHabilidad(url: string): void {
-    this.stadoHab = true
-    this.pokeSvc.getHab(url).subscribe({
-      next: res => {this.habPokemon = res, console.log(res);
-      },
-      error: err => console.log('Error al obtener datos')
-    });
-  }
-
-  obtenerColorTipo(tipe : string) : string {
+  obtenerColorTipo(tipe: string): string {
     switch (tipe) {
       case 'grass':
         return 'bg-gradient-to-b from-green-500 via-green-300 to-green-500'
@@ -58,10 +70,10 @@ export class PokeApiDetailsComponent implements OnChanges, OnInit {
 
       case 'flying':
         return 'bg-gradient-to-b from-sky-500 via-sky-300 to-sky-500'
-      
+
       case 'water':
         return 'bg-gradient-to-b from-blue-600 via-blue-400 to-blue-600'
-      
+
       case 'bug':
         return 'bg-gradient-to-b from-lime-500 via-lime-300 to-lime-500'
 
@@ -70,7 +82,7 @@ export class PokeApiDetailsComponent implements OnChanges, OnInit {
 
       case 'electric':
         return 'bg-gradient-to-b from-yellow-400 via-yellow-200 to-yellow-400'
-        
+
       case 'fairy':
         return 'bg-gradient-to-b from-pink-400 via-pink-200 to-pink-400'
 
@@ -85,13 +97,13 @@ export class PokeApiDetailsComponent implements OnChanges, OnInit {
 
       case 'ground':
         return 'bg-gradient-to-b from-yellow-600 via-yellow-400 to-yellow-600'
-      
+
       case 'ice':
         return 'bg-gradient-to-b from-cyan-400 via-cyan-200 to-cyan-400'
-      
+
       case 'normal':
         return 'bg-gradient-to-b from-neutral-400 via-neutral-300 to-neutral-400'
-      
+
       case 'rock':
         return 'bg-gradient-to-b from-yellow-700 via-yellow-600 to-yellow-700'
 
@@ -101,10 +113,10 @@ export class PokeApiDetailsComponent implements OnChanges, OnInit {
       case 'dragon':
         return 'bg-gradient-to-b from-violet-600 via-violet-400 to-violet-600'
 
-      default :
+      default:
         return ''
     }
-    
+
   }
 
 }

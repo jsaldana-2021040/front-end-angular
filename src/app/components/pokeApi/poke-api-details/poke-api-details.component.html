@@ -1,42 +1,52 @@
-<div class="w-full mt-10" *ngIf="data != null">
-  <div class="card shadow-none text-center py-0 px-6 bg-red-500 dark:bg-red-500 border-4 border-slate-800">
+<div *ngIf="data == null">
+  <div class="flex flex-col">
+    <img [style.width.%]="imageSize" src="https://assets.stickpng.com/images/612ce4761b9679000402af1c.png" class="mx-auto">
+    <div *ngIf="estadoInicio" (click)="clicInicio()" class="font-pixel md:mb-28 justify-center text-2xl md:text-5xl hover:cursor-pointer hover:-translate-y-2 transition-all flex">
+      >>Clic para empezar 
+      <img src="https://art.pixilart.com/sr2a947c8f967b8.png" class="w-8 md:w-12">
+    </div>
+  </div>
+</div>
+
+<div class="w-full mt-10 mb-10" *ngIf="data != null">
+  <div class="card shadow-none mb-3 text-center py-0 px-4 bg-red-500 dark:bg-red-500 border-4 border-slate-800">
 
     <div class="px-3 py-2 bg-red-400 font-pixel text-xl">
 
-      <div class="bg-white dark:bg-slate-500">
+      <div class="bg-white dark:bg-slate-600 my-2">
 
         <div class="lg:flex">
 
           <!-- imagen y tipos -->
-          <div class="lg:w-1/3">
-            <div class="mt-5">
-              <div>
+          <div class="lg:w-1/2 rounded-r-md">
+            <div class="mt-5 flex ml-5">
+              <div class="rounded-3xl bg-neutral-300 dark:bg-slate-500 px-3 mb-2">
                 Lv:{{data.base_experience}}
               </div>
-              <div>
+              <div class="ml-4">
                 {{data.name}}
               </div>
             </div>
-            <div class="h-60 flex">
+            <div class="h-60 flex bg-slate-200 mx-5 rounded-md dark:bg-gray-800 lg:h-72">
               <img class="m-auto scale-150"
                 src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/showdown/shiny/{{data.id}}.gif?raw=true">
             </div>
 
-            <div class="flex flex-row justify-center items-center space-x-4 h-16">
+            <div class="flex flex-row justify-center items-center space-x-4 h-16 ml-5 mr-4">
               <div *ngFor="let item of data.types"
-                class="card mb-0 w-24 px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
+                class="card border-none dark:shadow-none dark:text-slate-900 mb-0 w-24 px-3 py-2 {{obtenerColorTipo(item.type.name)}}">{{item.type.name}}</div>
             </div>
           </div>
 
           <!-- estadisticas -->
-          <div class="flex flex-col lg:w-2/3 py-5">
+          <div class="flex flex-col lg:w-2/3 ml-5">
             <div class="h-1/6 flex flex-row" *ngFor="let stat of data.stats">
-              <div class="flex items-center w-56 pl-5">
+              <div class="flex items-center md:w-56 w-96 text-base md:text-xl">
                 {{stat.stat.name}}
               </div>
 
-              <div class="w-full flex items-center pr-20">
-                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+              <div class="w-full flex items-center md:pr-14 pr-4 ml-5">
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-800">
                   <div [style.width.%]="(stat.base_stat * 100) / 255"
                     class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-md">
                     {{stat.base_stat}}</div>
@@ -48,28 +58,20 @@
         </div>
 
         <!-- habilidades -->
-        <div class="border border-white dark:border-slate-500">
-          <div class="ml-5 flex space-x-5 mt-10 mb-10">
-            <ng-container *ngFor="let item of data.abilities">
-              <div (click)="mostrarHabilidad(item.ability.url)" class="card py-0 m-0 shadow-none">
-                <div>{{item.ability.name}}</div>
-              </div>
-            </ng-container>
-          </div>
-
-          <div *ngIf="stadoHab" class="card p-0 ml-5 mt-3 mr-5">
-            <div *ngFor="let i of habPokemon.effect_entries">
-              <div *ngIf="i.language.name == 'en'" class="text-left ml-2">{{i.short_effect}}</div>
-            </div>
-          </div>
-        </div>
+        <div class="text-left ml-5 mt-5 mb-3">Abilities:</div>
+        <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-x-5 mx-5 mb-7">
+        <ng-container *ngFor="let item of data.abilities">
+          <app-poke-api-habilidades [url]="item.ability.url"></app-poke-api-habilidades>
+        </ng-container>
+      </div>
 
         <!-- ataques -->
-        <div class="p-0 ml-5 mt-3 mr-5 grid grid-cols-2 pb-1 space-x-3">
-          <div *ngFor="let item of data.moves; index as i">
-            <div *ngIf="i<4" class="card mb-0 shadow-none py-2">{{item.move.name}}</div>
-          </div>
+        <div class="text-left ml-5 mb-3">Moves:</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-5 mx-5">
+        <div *ngFor="let item of data.moves; index as i">
+          <app-poke-api-ataques *ngIf="i<4" [url]="item.move.url"></app-poke-api-ataques>
         </div>
+      </div>
       </div>
 
     </div>

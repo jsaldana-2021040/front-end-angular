@@ -1,8 +1,8 @@
 <div class="md:flex">
 
-  <app-poke-api-details class="w-full mr-20 center my-auto" [url]="urlPokemon"></app-poke-api-details>
+  <app-poke-api-details [url]="urlPokemon" (clicLista)="estadoLista = $event" (setMusica)="musica = $event" class="w-full mx-auto my-auto px-5 ml-5"></app-poke-api-details>
   
-  <app-poke-api-list (selectedPokemon)="urlPokemon = $event"></app-poke-api-list>
+  <app-poke-api-list class="mr-16" *ngIf="estadoLista"  [musica]="musica" (selectedPokemon)="urlPokemon = $event"></app-poke-api-list>
 
 
 </div>

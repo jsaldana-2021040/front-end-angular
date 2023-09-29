@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { empty, filter, map } from 'rxjs';
+import { Paginado } from 'src/app/shared/interfaces/paginado';
 import { Poke } from 'src/app/shared/interfaces/poke';
 import { pokeService } from 'src/app/shared/services/poke.service';
 
@@ -12,11 +13,21 @@ import { pokeService } from 'src/app/shared/services/poke.service';
 })
 export class PokeApiListComponent implements OnInit {
 
+  @Input() musica = new Audio()
+
   @Output() selectedPokemon = new EventEmitter<string>();
 
   pokemon = new FormControl<string>('', { nonNullable: true, validators: Validators.required })
 
-  listPokemon = new Poke;
+  elegirMusica = new FormControl<string>('Lavender Town')
+
+  estadoRepro: boolean = false;
+
+  estadoBusqueda: boolean = false
+
+  estado: string = 'pause';
+
+  listPokemon = new Paginado<Poke>;
 
   estadoPokemon: boolean = false
 
@@ -25,62 +36,64 @@ export class PokeApiListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarDatos()
+    this.cargarDatos(1)
+    this.pokemon.valueChanges.subscribe(() => this.cargarDatos(1));
+    this.elegirMusica.valueChanges.subscribe(() => this.changeMusic());
   }
 
-  validarPokemon(): void {
-    if (this.pokemon.valid) {
-      this.buscarPokemon()
-    } else {
-      this.cargarDatos()
+  changeMusic(): void {
+    this.musica.src = '../../../../assets/' + this.elegirMusica.value + '.mp3'
+    this.musica.play()
+    this.estadoRepro = false
+    this.estado = 'pause'
+    this.musica.loop = true
+  }
+
+  clicPause(): void {
+    if (this.estadoRepro == false) {
+      this.musica.pause()
+      this.estadoRepro = true
+
+      this.estado = 'play'
+    } else if (this.estadoRepro == true) {
+      this.musica.play()
+      this.estadoRepro = false
+
+      this.estado = 'pause'
     }
   }
 
-  buscarPokemon(): void {
+  cargarDatos(pagina: number): void {
     let busqueda = this.pokemon.value.split(' ')
+    let params = new HttpParams().append('pagina', pagina).append('nombre', busqueda.join('-'));
 
-    this.pokeSvc.getAll().subscribe({
+    this.pokeSvc.getPg(params).subscribe({
       next: res => {
-        this.listPokemon = new Poke, res.results.map(item => {
-          if (item.name.includes(busqueda.join('-'))) {
-            this.listPokemon.results.push({
-              name: item.name,
-              url: item.url
-            })
-          }
-        })
+        this.listPokemon = res
+        if (this.listPokemon.items.length < 1) {
+          this.estadoBusqueda = true
+        } else {
+          this.estadoBusqueda = false
+        }
       },
-    });
-  }
-
-  // buscarPokemon() : void {
-  //   let busqueda = this.pokemon.value?.split(' ')
-
-  //   this.pokeSvc.getAllByUrl().subscribe({
-  //     next: res => res.results.map(item => { if (item.name == this.pokemon.value) {
-  //       console.log(item);
-  //     }
-  //     }),
-  //     error: err => console.log('Error al obtener datos')
-  //   });
-  // }
-
-  cargarDatos(): void {
-    this.pokeSvc.get().subscribe({
-      next: res => this.listPokemon = res,
       error: err => console.log('Error al obtener datos')
     });
   }
 
-  cambiarPagina(url: string): void {
-    this.pokeSvc.getPg(url).subscribe({
-      next: res => this.listPokemon = res,
-      error: err => console.log('Error al obtener datos')
-    });
+  upperCase(x: string) {
+
+    let palabra = x.split('-')
+
+    return palabra.join(' ').charAt(0).toUpperCase() + palabra.join(' ').slice(1);
   }
 
   seleccionarPokemon(url: string): void {
     this.selectedPokemon.emit(url);
+  }
+
+  getId(url: string): number {
+    let split: string[] = url.split('/');
+    return Number(split[6]);
   }
 
 }
