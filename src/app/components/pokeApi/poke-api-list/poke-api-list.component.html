@@ -48,7 +48,7 @@
 
   <div>
     <div *ngIf="listPokemon.page != listPokemon.pages && estadoBusqueda != true">
-      <button (click)="cargarDatos(listPokemon.page + 1)"
+      <button (click)="cargarDatos(listPokemon.page + 1)" (click)="volverArriba()"
         class="bg-transparent px-2 py-1 border-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent">
         <i class="fa-solid fa-angle-down text-3xl"></i>
       </button>

@@ -63,6 +63,10 @@ export class PokeApiListComponent implements OnInit {
     }
   }
 
+  volverArriba(): void {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
   cargarDatos(pagina: number): void {
     let busqueda = this.pokemon.value.split(' ')
     let params = new HttpParams().append('pagina', pagina).append('nombre', busqueda.join('-'));
