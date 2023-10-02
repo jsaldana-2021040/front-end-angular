@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div *ngIf="estadoBusqueda" class="font-pixel text-2xl card w-96 text-center">No se Encontro el pokemon</div>
+  <div *ngIf="estadoBusqueda" class="font-pixel text-2xl card w-96 text-center py-0 px-0">No se encontro el pokemon <img class="mx-auto" src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/0.png?raw=true"></div>
 
   <div (click)="seleccionarPokemon(item.url)" *ngFor="let item of listPokemon.items">
     <div class="flex flex-col">

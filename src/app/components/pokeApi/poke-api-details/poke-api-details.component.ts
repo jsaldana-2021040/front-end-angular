@@ -57,6 +57,13 @@ export class PokeApiDetailsComponent implements OnChanges {
     });
   }
 
+  upperCase(x: string) {
+
+    let palabra = x.split('-')
+
+    return palabra.join(' ').charAt(0).toUpperCase() + palabra.join(' ').slice(1);
+  }
+
   obtenerColorTipo(tipe: string): string {
     switch (tipe) {
       case 'grass':

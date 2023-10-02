@@ -13,4 +13,11 @@ export class PokeApiDatosListComponent {
   @Input() nombre = new String;
 
   @Input() id = new Number;
+
+  upperCase(x: String) {
+
+    let palabra = x.split('-')
+
+    return palabra.join(' ').charAt(0).toUpperCase() + palabra.join(' ').slice(1);
+  }
 }
