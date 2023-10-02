@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Paginado } from 'src/app/shared/interfaces/paginado';
 import { Poke } from 'src/app/shared/interfaces/poke';
+import { pokeService } from 'src/app/shared/services/poke.service';
 
 @Component({
   selector: 'app-poke-api-datos-list',
@@ -10,14 +11,14 @@ import { Poke } from 'src/app/shared/interfaces/poke';
 })
 export class PokeApiDatosListComponent {
 
-  @Input() nombre = new String;
+  @Input() nombre = '';
+  @Input() id = 0;
 
-  @Input() id = new Number;
+  constructor (
+    private pokeSvc: pokeService
+  ) { }
 
-  upperCase(x: String) {
-
-    let palabra = x.split('-')
-
-    return palabra.join(' ').charAt(0).toUpperCase() + palabra.join(' ').slice(1);
+  formatTxt(txt: string) {
+    return this.pokeSvc.formatText(txt);
   }
 }
