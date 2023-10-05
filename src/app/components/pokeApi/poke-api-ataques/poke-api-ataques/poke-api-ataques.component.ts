@@ -26,11 +26,8 @@ export class PokeApiAtaquesComponent implements OnInit {
     });
   }
 
-  upperCase(x: string) {
-
-    let palabra = x.split('-')
-
-    return palabra.join(' ').charAt(0).toUpperCase() + palabra.join(' ').slice(1);
+  formatTxt(txt: string) {
+    return this.pokeSvc.formatText(txt);
   }
 
   obtenerColorTipo(type: string): string {

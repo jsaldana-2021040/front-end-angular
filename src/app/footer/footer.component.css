@@ -3,7 +3,7 @@ footer{
 }
 
 .footer-content{
-  @apply flex items-center justify-center text-center mt-2
+  @apply flex items-center justify-center text-center mt-2 mb-3
 }
 
 .footer-content h3{

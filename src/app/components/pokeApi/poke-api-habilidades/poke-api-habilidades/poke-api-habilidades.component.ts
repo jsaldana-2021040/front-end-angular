@@ -25,8 +25,8 @@ export class PokeApiHabilidadesComponent implements OnInit {
     });
   }
 
-  upperCase(palabra : string) {
-    return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+  formatTxt(txt: string) {
+    return this.pokeSvc.formatText(txt);
   }
 
 }

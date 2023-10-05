@@ -1,0 +1,40 @@
+<page-header icono="list-check" nombrePagina="Permiso: {{accion}}" [mostrarBtnAgregar]="false" />
+
+<div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form [formGroup]="permiso" (submit)="onSubmit()" autocomplete="off">
+      
+      <div class="card">
+        <div>
+          <label for="permiso" class="form-label">Permiso<span class="text-red-600 text-xl">*</span></label>
+          <input formControlName="permiso"type="text" (focusout)="trimFormValue('permiso')">
+          <app-form-errors [control]="permiso.controls.permiso" />
+        </div>
+
+        <div>
+          <label for="descripcion" class="form-label">Descripcion<span class="text-red-600 text-xl">*</span></label>
+          <input formControlName="descripcion" type="text" (focusout)="trimFormValue('descripcion')">
+          <app-form-errors [control]="permiso.controls.descripcion" />
+        </div>
+
+        <div>
+          <label for="modulo" class="form-label">Modulo<span class="text-red-600 text-xl">*</span></label>
+          <select name="modulo" id="modulo" formControlName="moduloCod">
+            <option *ngFor="let item of modulosList" [ngValue]="item.codModulo">{{item.modulo}}</option>
+          </select>
+          <app-form-errors [control]="permiso.controls.moduloCod" />
+        </div>
+
+      </div>
+
+      <div class="flex grid-cols-2 gap-x-2">
+        <button type="submit" [disabled]="enviandoDatos" class="btn-p hover:-translate-y-1 transition-all">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+        <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="..">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

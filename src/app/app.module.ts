@@ -38,6 +38,7 @@ import { PokeApiContainerComponent } from './components/pokeApi/poke-api-contain
 import { PokeApiHabilidadesComponent } from './components/pokeApi/poke-api-habilidades/poke-api-habilidades/poke-api-habilidades.component';
 import { PokeApiAtaquesComponent } from './components/pokeApi/poke-api-ataques/poke-api-ataques/poke-api-ataques.component';
 import { PokeApiDatosListComponent } from './components/pokeApi/poke-api-datos-list/poke-api-datos-list/poke-api-datos-list.component';
+import { RolesListComponent } from './components/roles/roles-list/roles-list.component';
 
 @NgModule({
   declarations: [
@@ -51,23 +52,20 @@ import { PokeApiDatosListComponent } from './components/pokeApi/poke-api-datos-l
     EmpresasListComponent,
     PersonasListComponent,
     UsuariosListComponent,
-    PageHeaderComponent,
     EmpresasCreateComponent,
     PersonasCreateComponent,
     UsuariosCreateComponent,
-    FormErrorsComponent,
     EmpresasEditComponent,
     PersonasEditComponent,
     UsuariosEditComponent,
     LoginComponent,
-    PaginadorComponent,
-    TableContainerComponent,
     PokeApiListComponent,
     PokeApiDetailsComponent,
     PokeApiContainerComponent,
     PokeApiHabilidadesComponent,
     PokeApiAtaquesComponent,
     PokeApiDatosListComponent,
+    RolesListComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +74,11 @@ import { PokeApiDatosListComponent } from './components/pokeApi/poke-api-datos-l
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,
+    PageHeaderComponent,
+    TableContainerComponent,
+    TableContainerComponent,
+    PaginadorComponent,
+    FormErrorsComponent,
     ToastrModule.forRoot({
       autoDismiss: true
     }),

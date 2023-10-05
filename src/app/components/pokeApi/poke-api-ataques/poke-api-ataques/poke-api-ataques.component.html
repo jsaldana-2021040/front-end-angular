@@ -1,5 +1,5 @@
 <div class="card dark:shadow-none shadow-none py-1 mb-5 md:h-36 text-slate-900 {{obtenerColorTipo(ataquesPokemon.type.name)}}">
-    <span class="font-semibold">{{upperCase(ataquesPokemon.name)}}</span>
+    <span class="font-semibold">{{formatTxt(ataquesPokemon.name)}}</span>
     <div *ngFor="let i of ataquesPokemon.effect_entries">
       <div *ngIf="i.language.name == 'en'" class="text-left ml-2">{{i.short_effect}}</div>
     </div>

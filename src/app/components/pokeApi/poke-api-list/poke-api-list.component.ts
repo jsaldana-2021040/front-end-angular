@@ -84,13 +84,6 @@ export class PokeApiListComponent implements OnInit {
     });
   }
 
-  upperCase(x: string) {
-
-    let palabra = x.split('-')
-
-    return palabra.join(' ').charAt(0).toUpperCase() + palabra.join(' ').slice(1);
-  }
-
   seleccionarPokemon(url: string): void {
     this.selectedPokemon.emit(url);
   }
