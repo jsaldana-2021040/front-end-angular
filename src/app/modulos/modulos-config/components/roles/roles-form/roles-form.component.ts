@@ -97,8 +97,8 @@ export class RolesFormComponent {
 
       this.enviandoDatos = true;
       this.rolesSvc.post(body).subscribe({
-        next: res => this.router.navigate(['..'], { relativeTo: this.route }),
-        error: err => {
+        next: () => this.router.navigate(['..'], { relativeTo: this.route }),
+        error: () => {
           this.enviandoDatos = false;
           this.toastr.error('Error', '', {
             positionClass: "toast-bottom-right", toastClass: "ngx-toastr  "
@@ -108,7 +108,6 @@ export class RolesFormComponent {
       });
     } else {
       if (this.rol.invalid) {
-        console.log('no se ingresaron todos los datos necesarios');
         this.enviandoDatos = false;
         return;
       }
@@ -116,13 +115,15 @@ export class RolesFormComponent {
       this.enviandoDatos = true;
 
       this.rolesSvc.put(this.getBody(), this.id).subscribe({
-        next: res => this.router.navigate(['..'], { relativeTo: this.route }),
-        error: err => {
-          console.log('Error al insertar datos');
+        next: () => this.router.navigate(['..'], { relativeTo: this.route }),
+        error: () => {
           this.enviandoDatos = false;
-        }
+          this.toastr.error('Error', '', {
+            positionClass: "toast-bottom-right", toastClass: "ngx-toastr  "
+          });
+        },
+        complete: () => this.showSuccess()
       });
-      this.showSuccess()
     }
   }
 
