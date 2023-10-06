@@ -45,19 +45,22 @@ export class RolesFormComponent {
       error: err => console.log('Error al obtener datos')
     });
 
+
+
     if (this.id == null) {
       this.accion = 'Agregar'
     } else {
       this.accion = 'Editar'
       this.rolesSvc.getId(this.id).subscribe({
         next: res => {
-          console.log(res)
           this.rol.patchValue(res)
-          res.rolesPermisos.map(permiso => {
+          res.rolesPermisos.forEach(permiso => {
             if (permiso.activo == true) {
-              this.rol.controls.permisos.patchValue([{
-                checked: 'true'
-              }])
+              this.rol.controls.permisos.controls.forEach(datos => {
+                if (permiso.permisosCod == datos.controls.permisoCod.value) {
+                  datos.controls.checked.setValue(true)
+                }
+              })
             }
           })
         },
@@ -110,7 +113,7 @@ export class RolesFormComponent {
 
       this.enviandoDatos = true;
 
-      this.rolesSvc.put(this.rol.value, this.id).subscribe({
+      this.rolesSvc.put(this.getBody(), this.id).subscribe({
         next: res => this.router.navigate(['..'], { relativeTo: this.route }),
         error: err => {
           console.log('Error al insertar datos');
