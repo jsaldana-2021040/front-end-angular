@@ -45,8 +45,6 @@ export class RolesFormComponent {
       error: err => console.log('Error al obtener datos')
     });
 
-
-
     if (this.id == null) {
       this.accion = 'Agregar'
     } else {
@@ -60,11 +58,10 @@ export class RolesFormComponent {
                 if (permiso.permisosCod == datos.controls.permisoCod.value) {
                   datos.controls.checked.setValue(true)
                 }
-              })
+              });
             }
-          })
-        },
-        error: err => console.log('Error al obtener datos')
+          });
+        }, error: err => console.log('Error al obtener datos')
       });
     }
   }
