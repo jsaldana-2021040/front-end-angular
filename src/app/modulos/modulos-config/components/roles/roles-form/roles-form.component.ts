@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 import { Permisos } from 'src/app/shared/interfaces/Permisos';
 import { permisosService } from 'src/app/shared/services/permisos.service';
 import { RolesService } from 'src/app/shared/services/roles.service';
@@ -17,7 +18,6 @@ export class RolesFormComponent {
 
   enviandoDatos: boolean = false;
   @Input() id: number = 0
-  accion: string = ''
 
   rol = new FormGroup({
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
@@ -40,30 +40,35 @@ export class RolesFormComponent {
   ngOnInit(): void {
 
     let params = new HttpParams().append('activo', true);
+
     this.permisosSvc.get(params).subscribe({
-      next: res => { res.forEach(permiso => this.addFormPermiso(permiso)) },
-      error: err => console.log('Error al obtener datos')
+      next: res => {
+        res.forEach(permiso => this.addFormPermiso(permiso));
+        this.cargaDatos();
+      }, error: err => console.log('Error al obtener datos')
     });
 
+  }
+
+  cargaDatos(): void {
     if (this.id == null) {
-      this.accion = 'Agregar'
-    } else {
-      this.accion = 'Editar'
-      this.rolesSvc.getId(this.id).subscribe({
-        next: res => {
-          this.rol.patchValue(res)
-          res.rolesPermisos.forEach(permiso => {
-            if (permiso.activo == true) {
-              this.rol.controls.permisos.controls.forEach(datos => {
-                if (permiso.permisosCod == datos.controls.permisoCod.value) {
-                  datos.controls.checked.setValue(true)
-                }
-              });
-            }
-          });
-        }, error: err => console.log('Error al obtener datos')
-      });
+      return
     }
+
+    this.rolesSvc.getId(this.id).subscribe({
+      next: res => {
+        this.rol.patchValue(res);
+        res.rolesPermisos.forEach(permiso => {
+          if (permiso.activo == true) {
+            this.rol.controls.permisos.controls.forEach(datos => {
+              if (permiso.permisosCod == datos.controls.permisoCod.value) {
+                datos.controls.checked.setValue(true);
+              }
+            });
+          }
+        });
+      }, error: err => console.log('Error al obtener datos')
+    });
   }
 
   addFormPermiso(permiso: Permisos): void {
