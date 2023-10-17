@@ -2,25 +2,25 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form [formGroup]="rol" (submit)="onSubmit()" autocomplete="off">
+    <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
 
       <div class="card">
         <div>
           <label for="nombre" class="form-label">Nombre<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="nombre" type="text" (focusout)="trimFormValue('nombre')">
-          <app-form-errors [control]="rol.controls.nombre" />
+          <app-form-errors [control]="form.controls.nombre" />
         </div>
 
         <div>
           <label for="descripcion" class="form-label">Descripcion<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="descripcion" type="text" (focusout)="trimFormValue('descripcion')">
-          <app-form-errors [control]="rol.controls.descripcion" />
+          <app-form-errors [control]="form.controls.descripcion" />
         </div>
 
         <div>
           <label for="permisos" class="form-label">Permisos</label>
           <div class="card shadow-none bg-slate-200 dark:bg-gray-800 dark:border-b-gray-800 dark:shadow-none">
-            <div class="flex" *ngFor="let item of rol.controls.permisos.controls; index as i" formArrayName="permisos">
+            <div class="flex" *ngFor="let item of form.controls.permisos.controls; index as i" formArrayName="permisos">
               <div [formGroupName]="i">
                 <input formControlName="checked" [id]="i" type="checkbox" class="my-auto">
               </div>

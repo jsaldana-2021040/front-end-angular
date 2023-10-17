@@ -16,10 +16,10 @@ import { RolesService } from 'src/app/shared/services/roles.service';
 })
 export class RolesFormComponent {
 
-  enviandoDatos: boolean = false;
   @Input() id: number = 0
+  enviandoDatos: boolean = false;
 
-  rol = new FormGroup({
+  form = new FormGroup({
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     descripcion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     permisos: new FormArray<FormGroup<{
@@ -38,7 +38,6 @@ export class RolesFormComponent {
   ) { }
 
   ngOnInit(): void {
-
     let params = new HttpParams().append('activo', true);
 
     this.permisosSvc.get(params).subscribe({
@@ -47,9 +46,8 @@ export class RolesFormComponent {
         this.cargaDatos();
       }, error: err => console.log('Error al obtener datos')
     });
-
   }
-
+  
   cargaDatos(): void {
     if (this.id == null) {
       return
@@ -57,10 +55,10 @@ export class RolesFormComponent {
 
     this.rolesSvc.getId(this.id).subscribe({
       next: res => {
-        this.rol.patchValue(res);
+        this.form.patchValue(res);
         res.rolesPermisos.forEach(permiso => {
           if (permiso.activo == true) {
-            this.rol.controls.permisos.controls.forEach(datos => {
+            this.form.controls.permisos.controls.forEach(datos => {
               if (permiso.permisosCod == datos.controls.permisoCod.value) {
                 datos.controls.checked.setValue(true);
               }
@@ -72,7 +70,7 @@ export class RolesFormComponent {
   }
 
   addFormPermiso(permiso: Permisos): void {
-    this.rol.controls.permisos.push(new FormGroup({
+    this.form.controls.permisos.push(new FormGroup({
       permisoCod: new FormControl<number>(permiso.codPermiso, { nonNullable: false, validators: [Validators.required] }),
       permiso: new FormControl<string>(permiso.permiso, { nonNullable: false, validators: [Validators.required] }),
       checked: new FormControl<boolean>(false, { nonNullable: false, validators: [Validators.required] })
@@ -87,8 +85,8 @@ export class RolesFormComponent {
 
   onSubmit(): void {
     if (this.id == null) {
-      if (this.rol.invalid) {
-        this.rol.markAllAsTouched();
+      if (this.form.invalid) {
+        this.form.markAllAsTouched();
         this.enviandoDatos = false;
         return;
       }
@@ -107,7 +105,7 @@ export class RolesFormComponent {
         complete: () => this.showSuccess()
       });
     } else {
-      if (this.rol.invalid) {
+      if (this.form.invalid) {
         this.enviandoDatos = false;
         return;
       }
@@ -129,21 +127,21 @@ export class RolesFormComponent {
 
   getBody(): any {
     let listPermisos: number[] = [];
-    this.rol.controls.permisos.controls.forEach(item => {
+    this.form.controls.permisos.controls.forEach(item => {
       if (item.controls.checked.value) {
         listPermisos.push(item.controls.permisoCod.value)
       }
     });
 
     return {
-      nombre: this.rol.controls.nombre.value,
-      descripcion: this.rol.controls.descripcion.value,
+      nombre: this.form.controls.nombre.value,
+      descripcion: this.form.controls.descripcion.value,
       permisos: listPermisos
     };
   }
 
   trimFormValue(control: string): void {
-    let val = String(this.rol.get(control)?.value);
-    this.rol.get(control)?.setValue(val.trim());
+    let val = String(this.form.get(control)?.value);
+    this.form.get(control)?.setValue(val.trim());
   }
 }
