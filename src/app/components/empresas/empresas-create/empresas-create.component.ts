@@ -15,7 +15,7 @@ export class EmpresasCreateComponent {
 
   enviandoDatos: boolean = false;
 
-  empresa = new FormGroup({
+  form = new FormGroup({
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     direccion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)] }),
@@ -37,13 +37,13 @@ export class EmpresasCreateComponent {
 
   onSubmit(): void {
     
-    if (this.empresa.invalid) {
-      this.empresa.markAllAsTouched();
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       this.enviandoDatos = false;
       return;
     }
 
-    let body = this.empresa.value;
+    let body = this.form.value;
     body.telefono = body.codigoPais! + ' ' +  body.telefono!;
     
 
@@ -61,7 +61,7 @@ export class EmpresasCreateComponent {
   }
 
   trimFormValue(control: string): void {
-    let val = String(this.empresa.get(control)?.value);
-    this.empresa.get(control)?.setValue(val.trim());
+    let val = String(this.form.get(control)?.value);
+    this.form.get(control)?.setValue(val.trim());
   }
 }

@@ -2,19 +2,19 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
   <div class="card sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-5" [formGroup]="persona" (submit)="onSubmit()" autocomplete="off">
+    <form class="space-y-5" [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
 
       <div>
         <label for="nombres" class="form-label">Nombres<span class="text-red-600 text-xl">*</span></label>
         <input formControlName="nombres" id="nombres" name="nombres" type="text" (focusout)="trimFormValue('nombre')">
-        <app-form-errors [control]="persona.controls.nombres" />
+        <app-form-errors [control]="form.controls.nombres" />
       </div>
 
       <div>
         <label for="apellidos" class="form-label">Apellidos<span class="text-red-600 text-xl">*</span></label>
         <input formControlName="apellidos" id="apellidos" name="apellidos" type="text"
           (focusout)="trimFormValue('nombre')">
-        <app-form-errors [control]="persona.controls.apellidos" />
+        <app-form-errors [control]="form.controls.apellidos" />
       </div>
 
       <div>
@@ -22,7 +22,7 @@
         <select name="empresas" id="empresas" formControlName="empresaCod">
           <option *ngFor="let item of listEmpresas" [ngValue]="item.codEmpresa">{{item.nombre}}</option>
         </select>
-        <app-form-errors [control]="persona.controls.empresaCod" />
+        <app-form-errors [control]="form.controls.empresaCod" />
       </div>
 
       <div>
@@ -40,7 +40,7 @@
         <hr class="border-gray-400 border-2 mb-5">
 
         <div class="space-y-4" formArrayName="direcciones">
-          <ng-container *ngFor="let direccion of persona.controls.direcciones.controls; index as i; first as isFirst">
+          <ng-container *ngFor="let direccion of form.controls.direcciones.controls; index as i; first as isFirst">
             <hr class="border-gray-300 border-1" *ngIf="!isFirst">
             <div [formGroupName]="i" class="card shadow-md bg-slate-200 dark:bg-slate-600">
               

@@ -21,7 +21,7 @@ export class UsuariosCreateComponent {
 
   destroyRef = inject(DestroyRef)
 
-  usuario = new FormGroup({
+  form = new FormGroup({
     email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email, Validators.minLength(10)], }),
     password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(8)] }),
   });
@@ -46,16 +46,16 @@ export class UsuariosCreateComponent {
   }
 
   onSubmit(): void {
-    if (this.usuario.invalid) {
+    if (this.form.invalid) {
       console.log('no se ingresaron todos los datos necesarios');
-      this.usuario.markAllAsTouched();
+      this.form.markAllAsTouched();
       this.enviandoDatos = false;
       return;
     }
 
     this.enviandoDatos = true;
 
-    this.suscripcion = this.usuariosSvc.post(this.usuario.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.suscripcion = this.usuariosSvc.post(this.form.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: res => this.router.navigate(['..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');
@@ -67,7 +67,7 @@ export class UsuariosCreateComponent {
   }
 
   trimFormValue(control: string): void {
-    let val = String(this.usuario.get(control)?.value);
-    this.usuario.get(control)?.setValue(val.trim());
+    let val = String(this.form.get(control)?.value);
+    this.form.get(control)?.setValue(val.trim());
   }
 }

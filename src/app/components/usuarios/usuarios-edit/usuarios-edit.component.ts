@@ -22,7 +22,7 @@ export class UsuariosEditComponent {
 
   destroyRef = inject(DestroyRef)
 
-  usuario = new FormGroup({
+  form = new FormGroup({
     email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email, Validators.minLength(10)], }),
     password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(8)] }),
   });
@@ -42,21 +42,21 @@ export class UsuariosEditComponent {
 
   ngOnInit(): void {
     this.usuariosSvc.getId(this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: res => this.usuario.patchValue(res),
+      next: res => this.form.patchValue(res),
       error: err => console.log('Error al obtener datos')
     });
   }
 
   onSubmit(): void {
 
-    if (this.usuario.invalid) {
+    if (this.form.invalid) {
       console.log('no se ingresaron todos los datos necesarios');
       this.enviandoDatos = false;
       return;
     }
 
     this.enviandoDatos = true;
-    this.usuariosSvc.put(this.usuario.value, this.id).subscribe({
+    this.usuariosSvc.put(this.form.value, this.id).subscribe({
       next: res => this.router.navigate(['../..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');

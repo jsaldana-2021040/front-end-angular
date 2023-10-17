@@ -2,19 +2,19 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form [formGroup]="empresa" (submit)="onSubmit()" autocomplete="off">
+    <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
       
       <div class="card">
         <div>
           <label for="nombre" class="form-label">Nombre<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="nombre" id="nombre" name="nombre" type="text" (focusout)="trimFormValue('nombre')">
-          <app-form-errors [control]="empresa.controls.nombre" />
+          <app-form-errors [control]="form.controls.nombre" />
         </div>
 
         <div>
           <label for="direccion" class="form-label">Direccion<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="direccion" id="direccion" name="direccion" type="text" (focusout)="trimFormValue('direccion')">
-          <app-form-errors [control]="empresa.controls.direccion" />
+          <app-form-errors [control]="form.controls.direccion" />
         </div>
 
         <div>
@@ -25,7 +25,7 @@
             </select>
             <input formControlName="telefono" id="telefono" name="telefono" type="text" (focusout)="trimFormValue('telefono')">
           </div>
-          <app-form-errors [control]="empresa.controls.telefono" />
+          <app-form-errors [control]="form.controls.telefono" />
         </div>
       </div>
 

@@ -2,19 +2,19 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form [formGroup]="permiso" (submit)="onSubmit()" autocomplete="off">
+    <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
       
       <div class="card">
         <div>
           <label for="permiso" class="form-label">Permiso<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="permiso"type="text" (focusout)="trimFormValue('permiso')">
-          <app-form-errors [control]="permiso.controls.permiso" />
+          <app-form-errors [control]="form.controls.permiso" />
         </div>
 
         <div>
           <label for="descripcion" class="form-label">Descripcion<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="descripcion" type="text" (focusout)="trimFormValue('descripcion')">
-          <app-form-errors [control]="permiso.controls.descripcion" />
+          <app-form-errors [control]="form.controls.descripcion" />
         </div>
 
         <div>
@@ -22,7 +22,7 @@
           <select name="modulo" id="modulo" formControlName="moduloCod">
             <option *ngFor="let item of modulosList" [ngValue]="item.codModulo">{{item.modulo}}</option>
           </select>
-          <app-form-errors [control]="permiso.controls.moduloCod" />
+          <app-form-errors [control]="form.controls.moduloCod" />
         </div>
 
       </div>

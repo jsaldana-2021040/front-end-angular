@@ -14,10 +14,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ModulosFormComponent implements OnInit {
 
   enviandoDatos: boolean = false;
-  @Input() id: number = 0
   accion: string = ''
+  @Input() id: number = 0
 
-  modulo = new FormGroup({
+  form = new FormGroup({
     modulo: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     descripcion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
   });
@@ -28,13 +28,14 @@ export class ModulosFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+
   ngOnInit(): void {
     if (this.id == null) {
       this.accion = 'Agregar'
     } else {
       this.accion = 'Editar'
       this.modulosSvc.getId(this.id).subscribe({
-        next: res => this.modulo.patchValue(res),
+        next: res => this.form.patchValue(res),
         error: err => console.log('Error al obtener datos')
       });
     }
@@ -48,15 +49,15 @@ export class ModulosFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.id == null) {
-      if (this.modulo.invalid) {
-        this.modulo.markAllAsTouched();
+      if (this.form.invalid) {
+        this.form.markAllAsTouched();
         this.enviandoDatos = false;
         return;
       }
 
 
       this.enviandoDatos = true;
-      this.modulosSvc.post(this.modulo.value).subscribe({
+      this.modulosSvc.post(this.form.value).subscribe({
         next: res => this.router.navigate(['..'], { relativeTo: this.route }),
         error: err => {
           this.enviandoDatos = false;
@@ -67,7 +68,7 @@ export class ModulosFormComponent implements OnInit {
         complete: () => this.showSuccess()
       });
     } else {
-      if (this.modulo.invalid) {
+      if (this.form.invalid) {
         console.log('no se ingresaron todos los datos necesarios');
         this.enviandoDatos = false;
         return;
@@ -75,7 +76,7 @@ export class ModulosFormComponent implements OnInit {
 
       this.enviandoDatos = true;
 
-      this.modulosSvc.put(this.modulo.value, this.id).subscribe({
+      this.modulosSvc.put(this.form.value, this.id).subscribe({
         next: res => this.router.navigate(['..'], { relativeTo: this.route }),
         error: err => {
           console.log('Error al insertar datos');
@@ -87,7 +88,7 @@ export class ModulosFormComponent implements OnInit {
   }
 
   trimFormValue(control: string): void {
-    let val = String(this.modulo.get(control)?.value);
-    this.modulo.get(control)?.setValue(val.trim());
+    let val = String(this.form.get(control)?.value);
+    this.form.get(control)?.setValue(val.trim());
   }
 }

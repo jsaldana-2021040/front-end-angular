@@ -17,10 +17,10 @@ export class PermisosFormComponent implements OnInit {
 
   modulosList: Modulos[] = [];
   enviandoDatos: boolean = false;
-  @Input() id: number = 0
   accion: string = ''
+  @Input() id: number = 0
 
-  permiso = new FormGroup({
+  form = new FormGroup({
     permiso: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     descripcion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     moduloCod: new FormControl<number>(0, { nonNullable: true, validators: Validators.required }),
@@ -47,7 +47,7 @@ export class PermisosFormComponent implements OnInit {
     } else {
       this.accion = 'Editar'
       this.permisosSvc.getId(this.id).subscribe({
-        next: res => this.permiso.patchValue(res),
+        next: res => this.form.patchValue(res),
         error: err => console.log('Error al obtener datos')
       });
     }
@@ -61,15 +61,15 @@ export class PermisosFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.id == null) {
-      if (this.permiso.invalid) {
-        this.permiso.markAllAsTouched();
+      if (this.form.invalid) {
+        this.form.markAllAsTouched();
         this.enviandoDatos = false;
         return;
       }
 
 
       this.enviandoDatos = true;
-      this.permisosSvc.post(this.permiso.value).subscribe({
+      this.permisosSvc.post(this.form.value).subscribe({
         next: res => this.router.navigate(['..'], { relativeTo: this.route }),
         error: err => {
           this.enviandoDatos = false;
@@ -80,7 +80,7 @@ export class PermisosFormComponent implements OnInit {
         complete: () => this.showSuccess()
       });
     } else {
-      if (this.permiso.invalid) {
+      if (this.form.invalid) {
         console.log('no se ingresaron todos los datos necesarios');
         this.enviandoDatos = false;
         return;
@@ -88,7 +88,7 @@ export class PermisosFormComponent implements OnInit {
 
       this.enviandoDatos = true;
 
-      this.permisosSvc.put(this.permiso.value, this.id).subscribe({
+      this.permisosSvc.put(this.form.value, this.id).subscribe({
         next: res => this.router.navigate(['..'], { relativeTo: this.route }),
         error: err => {
           console.log('Error al insertar datos');
@@ -100,7 +100,7 @@ export class PermisosFormComponent implements OnInit {
   }
 
   trimFormValue(control: string): void {
-    let val = String(this.permiso.get(control)?.value);
-    this.permiso.get(control)?.setValue(val.trim());
+    let val = String(this.form.get(control)?.value);
+    this.form.get(control)?.setValue(val.trim());
   }
 }

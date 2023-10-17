@@ -16,7 +16,7 @@ export class EmpresasEditComponent implements OnInit {
 
   enviandoDatos: boolean = false;
 
-  empresa = new FormGroup({
+  form = new FormGroup({
     nombre: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     direccion: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     telefono: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]}),
@@ -40,7 +40,7 @@ export class EmpresasEditComponent implements OnInit {
     this.empresasSvc.getId(this.id).subscribe({
       next: res => {
         let partesTelefono = res.telefono.split(' ');
-        this.empresa.patchValue({
+        this.form.patchValue({
           nombre: res.nombre,
           direccion: res.direccion,
           telefono: partesTelefono[1],
@@ -54,10 +54,10 @@ export class EmpresasEditComponent implements OnInit {
 
 
   onSubmit(): void {
-    let body = this.empresa.value;
+    let body = this.form.value;
     body.telefono = body.codigoPais! + ' ' +  body.telefono!;
 
-    if (this.empresa.invalid) {
+    if (this.form.invalid) {
       this.enviandoDatos = false;
       return;
     }

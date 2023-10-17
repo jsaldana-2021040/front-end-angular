@@ -24,7 +24,7 @@ export class PersonasCreateComponent implements OnInit {
 
   destroyRef = inject(DestroyRef)
 
-  persona = new FormGroup({
+  form = new FormGroup({
     nombres: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(100), Validators.minLength(3)] }),
     apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     tieneVisa: new FormControl<boolean>(false, { nonNullable: true }),
@@ -56,15 +56,15 @@ export class PersonasCreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.persona.invalid) {
+    if (this.form.invalid) {
       console.log('no se ingresaron todos los datos necesarios');
-      this.persona.markAllAsTouched();
+      this.form.markAllAsTouched();
       this.enviandoDatos = false;
       return;
     }    
 
     this.enviandoDatos = true;
-    this.suscripcion = this.personasSvc.post(this.persona.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.suscripcion = this.personasSvc.post(this.form.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: res => this.router.navigate(['..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');
@@ -75,19 +75,19 @@ export class PersonasCreateComponent implements OnInit {
   }
 
   trimFormValue(control: string): void {
-    let val = String(this.persona.get(control)?.value);
-    this.persona.get(control)?.setValue(val.trim());
+    let val = String(this.form.get(control)?.value);
+    this.form.get(control)?.setValue(val.trim());
   }
 
   agregarDireccion(): void {
-    this.persona.controls.direcciones.push(new FormGroup({
+    this.form.controls.direcciones.push(new FormGroup({
       direccion: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)]}),
       zona: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)]}),
     }));
   }
 
   eliminarDireccion(index: number): void {
-    this.persona.controls.direcciones.removeAt(index);
+    this.form.controls.direcciones.removeAt(index);
   }
   
 }

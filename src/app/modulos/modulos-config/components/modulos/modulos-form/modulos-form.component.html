@@ -2,19 +2,19 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 my-10 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form [formGroup]="modulo" (submit)="onSubmit()" autocomplete="off">
+    <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
       
       <div class="card">
         <div>
           <label for="modulo" class="form-label">Modulo<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="modulo"type="text" (focusout)="trimFormValue('modulo')">
-          <app-form-errors [control]="modulo.controls.modulo" />
+          <app-form-errors [control]="form.controls.modulo" />
         </div>
 
         <div>
           <label for="descripcion" class="form-label">Descripcion<span class="text-red-600 text-xl">*</span></label>
           <input formControlName="descripcion" type="text" (focusout)="trimFormValue('descripcion')">
-          <app-form-errors [control]="modulo.controls.descripcion" />
+          <app-form-errors [control]="form.controls.descripcion" />
         </div>
       </div>
 

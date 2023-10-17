@@ -27,7 +27,7 @@ export class LoginComponent {
     private systemSvc: SystemService
   ) { }
 
-  usuario = new FormGroup({
+  form = new FormGroup({
     email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email, Validators.minLength(10)], }),
     password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(8)] }),
   });
@@ -46,7 +46,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     this.enviandoDatos = true;
-    this.suscripcion = this.loginSvc.post(this.usuario.value)
+    this.suscripcion = this.loginSvc.post(this.form.value)
       .pipe(
         takeUntilDestroyed(this.destroyRef)
       ).subscribe({

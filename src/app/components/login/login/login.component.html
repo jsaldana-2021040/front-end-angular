@@ -1,7 +1,7 @@
 
 <div class="block sm:flex sm:justify-center p-5">
   
-  <form class="space-y-4 w-full sm:max-w-sm pt-9 md:pl-10" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+  <form class="space-y-4 w-full sm:max-w-sm pt-9 md:pl-10" [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
     <div class="text-center">
       <i class="fa-solid fa-circle-user text-8xl mb-5"></i>
       <h1 class="mb-8">Login</h1>
@@ -11,15 +11,15 @@
       <div>
         <label for="email" class="form-label mb-2 dark:text-white">Email</label>
         <input formControlName="email" id="email" name="email" type="email" class="mb-2">
-        <app-form-errors [control]="usuario.controls.email"/>
+        <app-form-errors [control]="form.controls.email"/>
       </div>
       <div>
         <label for="password" class="form-label mb-2 dark:text-white">Password</label>
         <input formControlName="password" id="password" name="password" type="password">
-        <app-form-errors [control]="usuario.controls.password"/>
+        <app-form-errors [control]="form.controls.password"/>
       </div>
       <div class="flex grid-cols-2 gap-x-2 mt-8">
-        <button type="submit" class="btn-p enabled:hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || usuario.invalid">
+        <button type="submit" class="btn-p enabled:hover:-translate-y-1 transition-all" [disabled]="enviandoDatos || form.invalid">
           <i class="fa-solid fa-check"></i> Aceptar
         </button>
     </div>

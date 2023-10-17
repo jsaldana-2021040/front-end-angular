@@ -25,7 +25,7 @@ export class PersonasEditComponent {
 
   destroyRef = inject(DestroyRef)
 
-  persona = new FormGroup({
+  form = new FormGroup({
     nombres: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(100), Validators.minLength(3)] }),
     apellidos: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     tieneVisa: new FormControl<boolean>(false, { nonNullable: true }),
@@ -54,13 +54,13 @@ export class PersonasEditComponent {
     });
 
     this.personasSvc.getId(this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: res => this.persona.patchValue(res),
+      next: res => this.form.patchValue(res),
       error: err => console.log('Error al obtener datos')
     });
   }
 
   onSubmit(): void {
-    if (this.persona.invalid) {
+    if (this.form.invalid) {
       console.log('no se ingresaron todos los datos necesarios');
       this.enviandoDatos = false;
       return;
@@ -68,7 +68,7 @@ export class PersonasEditComponent {
 
     this.enviandoDatos = true;
 
-    this.suscripcion = this.personasSvc.put(this.persona.value, this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.suscripcion = this.personasSvc.put(this.form.value, this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: res => this.router.navigate(['../..'], { relativeTo: this.route }),
       error: err => {
         console.log('Error al insertar datos');

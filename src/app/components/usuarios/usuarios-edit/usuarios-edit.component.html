@@ -3,25 +3,25 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 lg:px-8">
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="usuario" (submit)="onSubmit()" autocomplete="off">
+    <form class="space-y-4 w-full sm:max-w-sm" [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
       
       <div class="card">
         <div>
           <label for="email" class="form-label">Email</label>
           <input formControlName="email" id="email" name="email" type="email">
-          <app-form-errors [control]="usuario.controls.email" />
+          <app-form-errors [control]="form.controls.email" />
         </div>
 
         <div>
           <label for="password" class="form-label">Password</label>
           <input formControlName="password" id="password" name="password" type="password">
-          <app-form-errors [control]="usuario.controls.password" />
+          <app-form-errors [control]="form.controls.password" />
         </div>
       </div>
 
       <div class="flex grid-cols-2 gap-x-2">
         <button type="submit" class="btn-p hover:-translate-y-1 transition-all"
-          [disabled]="enviandoDatos || usuario.invalid">
+          [disabled]="enviandoDatos || form.invalid">
           <i class="fa-solid fa-arrows-rotate"></i> Actualizar
         </button>
         <button type="button" class="btn-d hover:-translate-y-1 transition-all" routerLink="../..">
